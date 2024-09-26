@@ -1,0 +1,19 @@
+.container {
+  display: grid;
+  grid-template-rows: auto 1fr 1fr 1fr; /* Added another row */
+  grid-template-columns: repeat(4, 1fr); /* Four equal-width columns */
+  width: 90%;
+  height: 100vh;
+  padding: 5vh;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 0px;
+}
+.grid-item {
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}

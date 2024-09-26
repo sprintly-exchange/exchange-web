@@ -1,0 +1,32 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; 
+}
+
+.app-container {
+  height: 100vh; 
+  overflow: auto; 
+  border: #d9d9d9;
+ 
+}
+.dropdown-container {
+  padding: 20px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
