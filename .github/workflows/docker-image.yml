@@ -3,7 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - KK-web-app # Change to your default branch if necessary
+      - main # Change to your default branch if necessary
 
 jobs:
   build:
