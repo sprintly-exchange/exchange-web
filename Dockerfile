@@ -4,8 +4,6 @@ FROM node:14
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Set the environment variable in the container
-ENV REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL}
 
 # Copy the package.json and package-lock.json files to the working directory
 COPY package*.json ./
@@ -13,8 +11,6 @@ COPY package*.json ./
 
 # Install the dependencies
 RUN npm install && npm install -g serve
-
-
 
 # Copy the rest of the application code to the working directory
 COPY . .
