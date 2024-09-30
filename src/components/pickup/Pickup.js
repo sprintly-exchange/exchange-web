@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Select} from 'antd';
-import FsPickup from './FsPickup';
 import CurrentPickupsTable from './CurrentPickupsTable';
 import { Typography } from 'antd';
 import DynamicEditableForm from '../utils/DynamicEditableForm';

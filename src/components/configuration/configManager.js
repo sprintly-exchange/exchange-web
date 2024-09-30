@@ -18,7 +18,7 @@ const configManagerFE = (() => {
     // Save config to backend 
     //to be implemented
     const saveConfigToBackend = async () => {
-        try {
+        try {   
             config.id= `${process.env.REACT_APP_ID}`;
             await axiosInstance.post(`${process.env.REACT_APP_API_BASE_URL}/api/configuration/app`, config);
         } catch (error) {

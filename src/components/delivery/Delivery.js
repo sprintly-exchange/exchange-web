@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Select, Space} from 'antd';
-import FsDelivery from './FsDelivery';
 import CurrentDeliveriesTable from './CurrentDeliveriesTable';
 import { Typography } from 'antd';
 import DynamicEditableForm from '../utils/DynamicEditableForm';
