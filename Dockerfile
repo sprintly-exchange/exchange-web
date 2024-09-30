@@ -16,12 +16,12 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Copy the entrypoint script into the image
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
 # Expose port 3000
 EXPOSE 3000
 
-# Start server using the entrypoint script
+# Copy the entrypoint script into the image and give execution permissions
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Define the entrypoint script to run
 ENTRYPOINT ["/entrypoint.sh"]
