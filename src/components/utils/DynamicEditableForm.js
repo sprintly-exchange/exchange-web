@@ -121,6 +121,7 @@ const DynamicEditableForm = ({ inputData, apiUrl, httpMethod, objectName, action
                           || key === 'creationTime'
                           || key === 'registrationDate'
                           || key === 'code'
+                          || key === 'lastLoggedInTime'
                         } />
                       )}
                     </Form.Item>
