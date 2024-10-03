@@ -24,7 +24,7 @@ const YouTubeChannelVideos = () => {
 
   return (
     <div>
-      <center><h2>Sprintly Exchange Channel Videos</h2></center>
+     <br></br><hr></hr>
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
         {videos.map((video) => (
           <div key={video.id.videoId} style={{ margin: '20px' }}>
