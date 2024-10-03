@@ -15,6 +15,9 @@ RUN npm install && npm install -g serve
 # Copy the rest of the application code to the working directory
 COPY . .
 
+# Set the environment variable inside the container
+ENV REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL
+
 # Build the application
 RUN npm run build
 
