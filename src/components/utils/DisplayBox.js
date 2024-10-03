@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Modal, Input } from 'antd';
-import JSONFormatter from 'json-formatter-js';
-import xmlFormatter from 'xml-formatter';
+import React, { useState, useEffect, useRef } from 'react';
+import { Button, Modal } from 'antd';
 
 const DisplayBox = ({ inputData, visible, onClose }) => {
   const [formattedData, setFormattedData] = useState('');
   const [dataType, setDataType] = useState('');
+  const contentRef = useRef(null); // Reference for the editable div
 
   useEffect(() => {
     if (typeof inputData === 'string') {
-      inputData= inputData.replace(/^"|"$/g, '');
+      inputData = inputData.replace(/^"|"$/g, '');
       if (inputData.includes("UNH+") && inputData.includes("UNZ+")) {
         setDataType('EDIFACT');
         setFormattedData(inputData);
@@ -47,8 +46,6 @@ const DisplayBox = ({ inputData, visible, onClose }) => {
   const formatJson = (json) => {
     try {
       const jsonObj = JSON.parse(json);
-      //const formatter = new JSONFormatter(jsonObj, Infinity);
-      //setFormattedData(formatter.render().innerText);
       setFormattedData(json);
     } catch (e) {
       setFormattedData('Invalid JSON');
@@ -57,12 +54,20 @@ const DisplayBox = ({ inputData, visible, onClose }) => {
 
   const formatXml = (xml) => {
     try {
-      //const formatted = xmlFormatter(xml, { indentation: '  ', collapseContent: true });
-      //setFormattedData(formatted);
       setFormattedData(xml);
     } catch (e) {
       setFormattedData('Invalid XML');
     }
+  };
+
+  // Function to save the content as a text file
+  const saveToFile = () => {
+    const content = contentRef.current.innerText; // Get the edited content
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'formatted_data.txt'; // Default filename
+    link.click();
   };
 
   return (
@@ -71,15 +76,19 @@ const DisplayBox = ({ inputData, visible, onClose }) => {
       visible={visible}
       onCancel={onClose}
       footer={[
+        <Button key="save" onClick={saveToFile}>
+          Save
+        </Button>,
         <Button key="close" onClick={onClose}>
           Close
-        </Button>
+        </Button>,
       ]}
       width="80%"
       style={{ maxWidth: '100%' }}
     >
       {/* Editable Rich Text Box */}
       <div
+        ref={contentRef}
         contentEditable={true}
         suppressContentEditableWarning={true}
         style={{
