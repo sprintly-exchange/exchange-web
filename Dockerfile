@@ -39,14 +39,14 @@ COPY --from=build /usr/src/app/build ./build
 EXPOSE 3000
 
 # Copy the entrypoint script into the image and give execution permissions
-COPY ./entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY entrypoint.sh /usr/src/app/build/entrypoint.sh
+RUN chmod +x /usr/src/app/build/entrypoint.sh
 
 # Debug: Ensure the entrypoint.sh exists and has the correct permissions
-RUN ls -la /entrypoint.sh
+RUN ls -la /usr/src/app/build/entrypoint.sh
 
 # Set the environment variable for production
 ENV NODE_ENV=production
 
 # Use entrypoint script to run the application
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/usr/src/app/build/entrypoint.sh"]

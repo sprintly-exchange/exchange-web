@@ -1,5 +1,6 @@
 import axios from 'axios';
 import axiosInstance from '../utils/axiosConfig';
+import configManagerFE from './configManager';
 
 const userConfigManager = (() => {
     // Function to load userConfig from session storage
@@ -24,7 +25,7 @@ const userConfigManager = (() => {
     // Save userConfig to backend
     const saveConfigToBackend = async () => {
         try {
-            await axiosInstance.post(`${process.env.REACT_APP_API_BASE_URL}/api/configuration/user`, userConfig);
+            await axiosInstance.post(`${configManagerFE.getConfig('apiBaseUrl')}/api/configuration/user`, userConfig);
         } catch (error) {
             console.error('Error saving userConfig to backend', error);
         }
@@ -33,7 +34,7 @@ const userConfigManager = (() => {
     // Load userConfig from backend
     const loadConfigFromBackend = async () => {
         try {
-            const response = await axiosInstance.get(`${process.env.REACT_APP_API_BASE_URL}/api/configuration/user`);
+            const response = await axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/configuration/user`);
             userConfig = response.data || { appColors: {} }; // Ensure appColors is an object
             saveConfigToSession();
         } catch (error) {
