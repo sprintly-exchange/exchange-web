@@ -246,16 +246,16 @@
                     dataIndex: 'processingError',
                     key: 'processingError',
                     render: (text, record) => (
-                        <Button 
-                            type="link" 
-                            onClick={() => {
-                                this.setState({ transactionMessageDisplayContent: record.processingError });
-                                this.showModal();
-                            }}
-                            icon={<ExclamationCircleOutlined />}
-                        >
-                            
-                        </Button>
+                            <Button 
+                                type="link" 
+                                onClick={() => {
+                                    this.setState({ transactionMessageDisplayContent: record.processingError });
+                                    this.showModal();
+                                }}
+                                icon={<ExclamationCircleOutlined />}
+                            >
+                            </Button>
+                        
                     ),
                 },
             ];

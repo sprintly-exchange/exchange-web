@@ -24,7 +24,7 @@ const DisplayBox = ({ inputData, visible, onClose }) => {
       }
     } else {
       setDataType('Binary');
-      setFormattedData('Binary data cannot be displayed in text format.');
+      setFormattedData('N/A');
     }
   }, [inputData]);
 
