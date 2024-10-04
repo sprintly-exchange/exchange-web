@@ -16,18 +16,19 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Set environment variable for build
-ARG REACT_APP_API_BASE_URL
-ENV REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL
-
 # Build the application
 RUN npm run build
 
 # Stage 2: Production stage
 FROM node:14-alpine
 
+
 # Set the working directory for the production container
 WORKDIR /usr/src/app
+
+# Set environment variable for build
+ARG REACT_APP_API_BASE_URL
+ENV REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL
 
 # Install a lightweight HTTP server to serve the production build
 RUN npm install -g serve
