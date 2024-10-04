@@ -20,7 +20,7 @@ const AdminConfig = () => {
     }, []); // Empty dependency array ensures this runs only once on mount
 
     function checkStatus() {
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/demo/status`)
+        axiosInstance.get(`/api/demo/status`)
             .then(response => {
                 console.log('Demo mode status', response.data.status);
                 setEnabled(response.data.status);
@@ -31,7 +31,7 @@ const AdminConfig = () => {
     }
 
     const demoModeChange = () => {
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/demo/toggle`)
+        axiosInstance.get(`/api/demo/toggle`)
             .then(response => {
                 console.log('Demo mode switch status', response.status);
                 checkStatus();

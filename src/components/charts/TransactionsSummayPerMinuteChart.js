@@ -20,7 +20,7 @@ async function updateStat() {
   let timestamps = [];
 
   try {
-    const response = await axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/transactions/statistics/summary/statuses`);
+    const response = await axiosInstance.get(`/api/transactions/statistics/summary/statuses`);
     const flowCounts = [];
 
     for (const [timestamp, flows] of Object.entries(response.data)) {

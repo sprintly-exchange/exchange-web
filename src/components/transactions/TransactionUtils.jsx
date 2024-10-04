@@ -7,7 +7,7 @@ import axiosInstance from '../utils/axiosConfig';
 
     export async function getMessagefromServer(path) {
       try {
-        const response = await axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}${path}`, {
+        const response = await axiosInstance.get(`${path}`, {
           headers: {
             "Accept": "application/json"
           }

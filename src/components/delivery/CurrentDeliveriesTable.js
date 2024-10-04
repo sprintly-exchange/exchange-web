@@ -13,7 +13,7 @@ const CurrentDeliveriesTable = () => {
     const [dynamicRecordToEdit, setdynamicRecordToEdit] = useState([]);
 
     const handleDelete = record => {
-        axiosInstance.delete(`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/${record.id}`)
+        axiosInstance.delete(`/api/delivery/${record.id}`)
             .then(response => {
                 setData(prevDataSource => prevDataSource.filter(item => item.id !== record.id));
                 message.info(`Delivery record deleted with ID ${record.id}.`);
@@ -24,7 +24,7 @@ const CurrentDeliveriesTable = () => {
     };
 
     const editRecord = record => {
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/${record.id}`)
+        axiosInstance.get(`/api/delivery/${record.id}`)
             .then(response => {
                 setdynamicRecordToEdit(response.data);
             })
@@ -34,7 +34,7 @@ const CurrentDeliveriesTable = () => {
     };
 
     const handleExport = record => {
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/${record.id}`, {
+        axiosInstance.get(`/api/delivery/${record.id}`, {
             responseType: 'text', // This tells axios to expect a binary file response (like a CSV, PDF, etc.)
         })
             .then(response => {
@@ -117,7 +117,7 @@ const CurrentDeliveriesTable = () => {
     ];
 
     useEffect(() => {
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery`)
+        axiosInstance.get(`/api/delivery`)
             .then(response => {
                 setData(response.data);
                 setLoading(false);
@@ -143,7 +143,7 @@ const CurrentDeliveriesTable = () => {
             <div>
                 <DynamicEditableForm
                     inputData={dynamicRecordToEdit}
-                    apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/`}
+                    apiUrl={`/api/delivery/`}
                     httpMethod={'PUT'}
                     objectName={dynamicRecordToEdit.connectionName}
                     action={'Update'}

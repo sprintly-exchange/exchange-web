@@ -78,7 +78,7 @@ function UserManagement() {
 
   async function fetchOrganizations() {
     try {
-      axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/organizations`)
+      axiosInstance.get(`/api/organizations`)
         .then((response) => {
           setOrganizations(response.data);
         })
@@ -92,7 +92,7 @@ function UserManagement() {
   }
 
   async function fetchRoles() {
-    axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/users/roles`)
+    axiosInstance.get(`/api/users/roles`)
       .then((response) => {
         setRoles(response.data);
       })
@@ -103,7 +103,7 @@ function UserManagement() {
 
   async function fetchUsers() {
     try {
-      axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/users`)
+      axiosInstance.get(`/api/users`)
         .then((response) => {
           const data = response.data;
           setUsers(Array.isArray(data) ? data : [data]);
@@ -120,7 +120,7 @@ function UserManagement() {
   async function addUser(username, password, email, fullPhoneNumber, organizationId, roleId) {
     try {
       await axiosInstance.post(
-        `${configManagerFE.getConfig('apiBaseUrl')}/api/users/register-user`,
+        `/api/users/register-user`,
         { username, password, email, mobileNumber: fullPhoneNumber, organizationId, roleId }
       )
         .then((response) => {

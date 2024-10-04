@@ -17,7 +17,7 @@ const { Header, Content } = Layout;
 const SignUpPage = ({ setUser }) => {
     const onFinish = async (values) => {
         try {
-           const {id: organizationId } = await new ApiClient().getData(`${configManagerFE.getConfig('apiBaseUrl')}/api/openapis/DefaultOrganization`, 'GET');
+           const {id: organizationId } = await new ApiClient().getData(`/api/openapis/DefaultOrganization`, 'GET');
 
             // Construct user object from form values
             const user = {
@@ -28,7 +28,7 @@ const SignUpPage = ({ setUser }) => {
             };
 
             // Make API request to register user
-            const response = await new ApiClient().updateData(`${configManagerFE.getConfig('apiBaseUrl')}/api/users/register-user`, user, 'POST');
+            const response = await new ApiClient().updateData(`/api/users/register-user`, user, 'POST');
             // Check response status
             if (response.status.toUpperCase() === 'SUCCESS') {
                 message.success('Sign up successful!');
@@ -73,7 +73,7 @@ const SignUpPage = ({ setUser }) => {
     const loginUser = async (username, password) => {
         try {
             // Make API request to login user
-            const response = await new ApiClient().updateData(`${configManagerFE.getConfig('apiBaseUrl')}/api/iam/login`, { username, password }, 'POST');
+            const response = await new ApiClient().updateData(`/api/iam/login`, { username, password }, 'POST');
             
             // Check response status
             if (response.status === 'success') {

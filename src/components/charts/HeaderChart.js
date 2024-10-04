@@ -22,7 +22,7 @@ function HeaderChart() {
 
     const fetchData = async () => {
         try {
-          const response = await axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/transactions/statistics/summary`);
+          const response = await axiosInstance.get(`/api/transactions/statistics/summary`);
           const resultArray = Object.entries(response.data);
           setTotal(response.data.total);
           setFailures(response.data.failures);

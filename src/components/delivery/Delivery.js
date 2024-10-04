@@ -110,7 +110,7 @@ const Delivery = () => {
         {currentForm === 'fsTemplate' && (
             <DynamicEditableForm
               inputData={fsTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/`}
+              apiUrl={`/api/delivery/`}
               httpMethod={'POST'}
               objectName={'File System'}
               action={'Create'}
@@ -119,7 +119,7 @@ const Delivery = () => {
           {currentForm === 'noAuthTemplate' && (
             <DynamicEditableForm
               inputData={noAuthTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/`}
+              apiUrl={`/api/delivery/`}
               httpMethod={'POST'}
               objectName={'HTTP Without Authentication'}
               action={'Create'}
@@ -128,7 +128,7 @@ const Delivery = () => {
           {currentForm === 'basicAuthTemplate' && (
             <DynamicEditableForm
               inputData={basicAuthTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/`}
+              apiUrl={`/api/delivery/`}
               httpMethod={'POST'}
               objectName={'HTTP Basic Authentication'}
               action={'Create'}
@@ -137,7 +137,7 @@ const Delivery = () => {
           {currentForm === 'oAuth2Template' && (
             <DynamicEditableForm
               inputData={oAuth2Template}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/`}
+              apiUrl={`/api/delivery/`}
               httpMethod={'POST'}
               objectName={'OAuth 2.0'}
               action={'Create'}
@@ -146,7 +146,7 @@ const Delivery = () => {
           {currentForm === 'jwtTemplate' && (
             <DynamicEditableForm
               inputData={jwtTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/`}
+              apiUrl={`/api/delivery/`}
               httpMethod={'POST'}
               objectName={'JWT Authentication'}
               action={'Create'}
@@ -155,7 +155,7 @@ const Delivery = () => {
           {currentForm === 'kafkaTemplate' && (
             <DynamicEditableForm
               inputData={kafkaTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/`}
+              apiUrl={`/api/delivery/`}
               httpMethod={'POST'}
               objectName={'Kafka'}
               action={'Create'}
@@ -164,7 +164,7 @@ const Delivery = () => {
           {currentForm === 'openIDConnectTemplate' && (
             <DynamicEditableForm
               inputData={openIDConnectTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/`}
+              apiUrl={`/api/delivery/`}
               httpMethod={'POST'}
               objectName={'OpenID Connect'}
               action={'Create'}
@@ -173,7 +173,7 @@ const Delivery = () => {
           {currentForm === 'ftpTemplate' && (
             <DynamicEditableForm
               inputData={ftpTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/`}
+              apiUrl={`/api/delivery/`}
               httpMethod={'POST'}
               objectName={'FTP'}
               action={'Create'}
@@ -182,7 +182,7 @@ const Delivery = () => {
           {currentForm === 'sftpRecordType' && (
             <DynamicEditableForm
               inputData={sftpTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/`}
+              apiUrl={`/api/delivery/`}
               httpMethod={'POST'}
               objectName={'SFTP'}
               action={'Create'}
@@ -191,7 +191,7 @@ const Delivery = () => {
           {currentForm === websocketTemplate && (
             <DynamicEditableForm
               inputData={websocketTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/`}
+              apiUrl={`/api/delivery/`}
               httpMethod={'POST'}
               objectName={'WebSocket'}
               action={'Create'}
@@ -200,7 +200,7 @@ const Delivery = () => {
           {currentForm === 'partnerFinanceGroupSE' && (
             <DynamicEditableForm
               inputData={partnerFinanceGroupSE}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery/`}
+              apiUrl={`/api/delivery/`}
               httpMethod={'POST'}
               objectName={'Connect to Finance Group(Sweden)'}
               action={'Create'}

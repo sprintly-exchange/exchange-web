@@ -19,7 +19,7 @@ const SystemQueuesChart = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/system/queue/statistics`);
+      const response = await axiosInstance.get(`/api/system/queue/statistics`);
       const resultArray = Object.entries(response.data);
       const labelValues = [];
       const dataValues = [];

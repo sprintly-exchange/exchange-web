@@ -12,7 +12,7 @@ function OrganizationCreationForm() {
   const [triggerOrgfetch,setTriggerOrgfetch] = useState(false);
  
   async function addOrganization(name, address, email, web, phone) {
-    axiosInstance.post(`${configManagerFE.getConfig('apiBaseUrl')}/api/organizations/register-organization`, { name, address, email, web, phone })
+    axiosInstance.post(`/api/organizations/register-organization`, { name, address, email, web, phone })
     .then((response) => {
       //fetchOrganizations();
       message.success(response.data.message);

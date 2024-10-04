@@ -48,7 +48,7 @@ const Processing = () => {
 
       // Make a POST request to create a new processing record
       const response = await axiosInstance.post(
-        `${configManagerFE.getConfig('apiBaseUrl')}/api/processing`, 
+        `/api/processing`, 
         { code: encodedCode, processingName } // Send decoded code and processingName in the request body
       );
 

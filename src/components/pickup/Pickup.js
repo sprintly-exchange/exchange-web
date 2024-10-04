@@ -99,7 +99,7 @@ const Pickup = () => {
          {currentForm === 'fsTemplate' && (
             <DynamicEditableForm
               inputData={fsTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/`}
+              apiUrl={`/api/pickup/`}
               httpMethod={'POST'}
               objectName={'File System'}
               action={'Create'}
@@ -108,7 +108,7 @@ const Pickup = () => {
           {currentForm === 'noAuthTemplate' && (
             <DynamicEditableForm
               inputData={noAuthTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/`}
+              apiUrl={`/api/pickup/`}
               httpMethod={'POST'}
               objectName={'HTTP without Authentication'}
               action={'Create'}
@@ -117,7 +117,7 @@ const Pickup = () => {
           {currentForm === 'basicAuthTemplate' && (
             <DynamicEditableForm
               inputData={basicAuthTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/`}
+              apiUrl={`/api/pickup/`}
               httpMethod={'POST'}
               objectName={'HTTP Basic Authentication'}
               action={'Create'}
@@ -126,7 +126,7 @@ const Pickup = () => {
           {currentForm === 'oAuth2Template' && (
             <DynamicEditableForm
               inputData={oAuth2Template}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/`}
+              apiUrl={`/api/pickup/`}
               httpMethod={'POST'}
               objectName={'OAuth 2.0'}
               action={'Create'}
@@ -135,7 +135,7 @@ const Pickup = () => {
           {currentForm === 'jwtTemplate' && (
             <DynamicEditableForm
               inputData={jwtTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/`}
+              apiUrl={`/api/pickup/`}
               httpMethod={'POST'}
               objectName={'JWT Authentication'}
               action={'Create'}
@@ -144,7 +144,7 @@ const Pickup = () => {
           {currentForm === 'kafkaTemplate' && (
             <DynamicEditableForm
               inputData={kafkaTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/`}
+              apiUrl={`/api/pickup/`}
               httpMethod={'POST'}
               objectName={'Kafka'}
               action={'Create'}
@@ -153,7 +153,7 @@ const Pickup = () => {
           {currentForm === 'openIDConnectTemplate' && (
             <DynamicEditableForm
               inputData={openIDConnectTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/`}
+              apiUrl={`/api/pickup/`}
               httpMethod={'POST'}
               objectName={'OpenID Connect'}
               action={'Create'}
@@ -162,7 +162,7 @@ const Pickup = () => {
           {currentForm === 'ftpTemplate' && (
             <DynamicEditableForm
               inputData={ftpTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/`}
+              apiUrl={`/api/pickup/`}
               httpMethod={'POST'}
               objectName={'FTP'}
               action={'Create'}
@@ -171,7 +171,7 @@ const Pickup = () => {
           {currentForm === 'sftpTemplate' && (
             <DynamicEditableForm
               inputData={sftpTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/`}
+              apiUrl={`/api/pickup/`}
               httpMethod={'POST'}
               objectName={'SFTP'}
               action={'Create'}
@@ -180,7 +180,7 @@ const Pickup = () => {
           {currentForm === 'websocketTemplate' && (
             <DynamicEditableForm
               inputData={websocketTemplate}
-              apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/`}
+              apiUrl={`/api/pickup/`}
               httpMethod={'POST'}
               objectName={'WebSocket'}
               action={'Create'}

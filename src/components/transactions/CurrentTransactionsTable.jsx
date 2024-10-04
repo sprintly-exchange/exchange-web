@@ -308,7 +308,7 @@
             const { startDate, endDate } = this.state;
         
             // Ensure the correct API endpoint is used here
-            const url = `${configManagerFE.getConfig('apiBaseUrl')}/api/transactions/search?start=${startDate}&end=${endDate}&startDate=${new Date(startDate).toISOString()}&endDate=${new Date(endDate).toISOString()}`;
+            const url = `/api/transactions/search?start=${startDate}&end=${endDate}&startDate=${new Date(startDate).toISOString()}&endDate=${new Date(endDate).toISOString()}`;
         
             axiosInstance.get(url)
                 .then(async response => {
@@ -324,7 +324,7 @@
         // Search transactions by IDs
         searchTransactionsByIds = () => {
             const { searchMessageId, searchSenderId,searchReceiverId } = this.state;
-            const url = `${configManagerFE.getConfig('apiBaseUrl')}/api/transactions/searchbyIds?messageId=${searchMessageId}&senderId=${searchSenderId}&receiverId=${searchReceiverId}`;
+            const url = `/api/transactions/searchbyIds?messageId=${searchMessageId}&senderId=${searchSenderId}&receiverId=${searchReceiverId}`;
 
             axiosInstance.get(url)
                 .then(async response => {

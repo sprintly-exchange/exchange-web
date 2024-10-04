@@ -37,7 +37,7 @@ const TransactionsPerMinuteChart = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/transactions/statistics/minute`);
+      const response = await axiosInstance.get(`/api/transactions/statistics/minute`);
       const resultArray = Object.entries(response.data);
       const labelValues = [];
       const dataValues = [];

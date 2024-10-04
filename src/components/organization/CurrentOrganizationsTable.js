@@ -15,7 +15,7 @@ const CurrentOrganizationsTable = (setTriggerOrgfetch,triggerOrgfetch) => {
     const [dynamicRecordToEdit, setDynamicRecordToEdit] = useState({});
 
     const fetchOrganizations = async () => {
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/organizations`)
+        axiosInstance.get(`/api/organizations`)
         .then((response) => {
             setOrganizations(response.data);
             setTriggerOrgfetch(false);
@@ -32,7 +32,7 @@ const CurrentOrganizationsTable = (setTriggerOrgfetch,triggerOrgfetch) => {
 
     const handleDelete = async (record) => {
         try {
-            await axiosInstance.delete(`${configManagerFE.getConfig('apiBaseUrl')}/api/organizations/id/${record.id}`)
+            await axiosInstance.delete(`/api/organizations/id/${record.id}`)
             .then((response) => {
                 setOrganizations(prevDataSource => prevDataSource.filter(item => item.id !== record.id));
                 message.info(response.data.message);
@@ -48,7 +48,7 @@ const CurrentOrganizationsTable = (setTriggerOrgfetch,triggerOrgfetch) => {
 
     const editRecord = async (record) => {
         console.log(record);
-        await axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/organizations/id/${record.id}`)
+        await axiosInstance.get(`/api/organizations/id/${record.id}`)
         .then((response) => {
             setDynamicRecordToEdit(response.data);
         })
@@ -123,7 +123,7 @@ const CurrentOrganizationsTable = (setTriggerOrgfetch,triggerOrgfetch) => {
             <div>
                 <DynamicEditableForm
                         inputData={dynamicRecordToEdit}
-                        apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/organizations/id/${dynamicRecordToEdit.id}`}
+                        apiUrl={`/api/organizations/id/${dynamicRecordToEdit.id}`}
                         httpMethod='PUT'
                         objectName={ `Editing organization :  ${dynamicRecordToEdit.name||'Not Yet Selected'}` }
                         action='Update'

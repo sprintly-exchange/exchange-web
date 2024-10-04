@@ -67,7 +67,7 @@ const Flows = () => {
     }
 
     console.log('Submitting flow with name:', flow.flowName);
-    sendData(`${configManagerFE.getConfig('apiBaseUrl')}/api/flow`, flow);
+    sendData(`/api/flow`, flow);
   };
 
   async function sendData(url, data) {
@@ -129,7 +129,7 @@ const Flows = () => {
               <DynamicSelect
                 onDataChange={handleChildDataChange}
                 componentId={_PICKUP}
-                fetchUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup`}
+                fetchUrl={`/api/pickup`}
                 selectTypeText={'Select Pickup'}
               />
             </Col>
@@ -137,7 +137,7 @@ const Flows = () => {
               <DynamicSelect
                 onDataChange={handleChildDataChange}
                 componentId={_DELIVERY}
-                fetchUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/delivery`}
+                fetchUrl={`/api/delivery`}
                 selectTypeText={'Select Delivery'}
               />
             </Col>
@@ -145,7 +145,7 @@ const Flows = () => {
               <DynamicSelect
                 onDataChange={handleChildDataChange}
                 componentId={_PROCESSING}
-                fetchUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/processing`}
+                fetchUrl={`/api/processing`}
                 selectTypeText={'Select Processing (Optional)'}
               />
             </Col>

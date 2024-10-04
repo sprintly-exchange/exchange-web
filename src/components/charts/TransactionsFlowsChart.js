@@ -19,7 +19,7 @@ const TransactionsFlowsChart = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/transactions/statistics/flows/count`);
+      const response = await axiosInstance.get(`/api/transactions/statistics/flows/count`);
       const resultArray = Object.entries(response.data);
       const labelValues = [];
       const dataValues = [];

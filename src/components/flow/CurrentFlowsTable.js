@@ -30,7 +30,7 @@ const CurrentFlowsTable = () => {
 
     const handleDelete = (record) => {
         console.log('record', record.id);
-        axiosInstance.delete(`${configManagerFE.getConfig('apiBaseUrl')}/api/flow/${record.id}`)
+        axiosInstance.delete(`/api/flow/${record.id}`)
             .then(response => {
                 console.log('Delete status', response.status);
                 setData(prevDataSource => prevDataSource.filter(item => item.id !== record.id));
@@ -43,7 +43,7 @@ const CurrentFlowsTable = () => {
 
     const editRecord = record => {
         console.log('record id receivd for editing : ',record.id);
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/flow/${record.id}`)
+        axiosInstance.get(`/api/flow/${record.id}`)
             .then(response => {
                console.log('Flow received for editing',response.data);
                setdynamicRecordToEdit(response.data); 
@@ -57,7 +57,7 @@ const CurrentFlowsTable = () => {
 
     const handleActivateDeactivate = (record) => {
         const updatedStatus = !record.activationStatus; // Toggle the activation status
-        axiosInstance.put(`${configManagerFE.getConfig('apiBaseUrl')}/api/flow/activation/${record.id}`, { active: updatedStatus })
+        axiosInstance.put(`/api/flow/activation/${record.id}`, { active: updatedStatus })
             .then(response => {
                 setData(prevDataSource => prevDataSource.map(item => 
                     item.id === record.id ? { ...item, active: updatedStatus } : item
@@ -71,7 +71,7 @@ const CurrentFlowsTable = () => {
     };
 
     const handleExport = record => {
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/flow/${record.id}`, {
+        axiosInstance.get(`/api/flow/${record.id}`, {
             responseType: 'text', // This tells axios to expect a binary file response (like a CSV, PDF, etc.)
         })
             .then(response => {
@@ -174,7 +174,7 @@ const CurrentFlowsTable = () => {
     ];
 
     useEffect(() => {
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/flow`)
+        axiosInstance.get(`/api/flow`)
             .then(response => {
                 setData(response.data);
                 setLoading(false);
@@ -200,7 +200,7 @@ const CurrentFlowsTable = () => {
             </Spin>
             </div>
             <div>
-                <DynamicEditableForm inputData={dynamicRecordToEdit} apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/flow/`} httpMethod = {'PUT'}  objectName={dynamicRecordToEdit.flowName} action={'Update'}/>
+                <DynamicEditableForm inputData={dynamicRecordToEdit} apiUrl={`/api/flow/`} httpMethod = {'PUT'}  objectName={dynamicRecordToEdit.flowName} action={'Update'}/>
             </div>
         </>
 

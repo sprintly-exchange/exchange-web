@@ -15,7 +15,7 @@ const CurrentProcessingTable = () => {
 
     const handleDelete = (record) => {
         axiosInstance
-            .delete(`${configManagerFE.getConfig('apiBaseUrl')}/api/processing/${record.id}`)
+            .delete(`/api/processing/${record.id}`)
             .then((response) => {
                 setData((prevDataSource) => prevDataSource.filter((item) => item.id !== record.id));
                 message.info(`Processing details deleted with ID ${record.id}`);
@@ -27,7 +27,7 @@ const CurrentProcessingTable = () => {
 
     const editRecord = (record) => {
         axiosInstance
-            .get(`${configManagerFE.getConfig('apiBaseUrl')}/api/processing/${record.id}`)
+            .get(`/api/processing/${record.id}`)
             .then((response) => {
                 setDynamicRecordToEdit(response.data);
                 try {
@@ -59,7 +59,7 @@ const CurrentProcessingTable = () => {
             };
 
             axiosInstance
-                .put(`${configManagerFE.getConfig('apiBaseUrl')}/api/processing`, updatedRecord)
+                .put(`/api/processing`, updatedRecord)
                 .then((response) => {
                     message.success(`Processing details updated with ID ${response.data.id}`);
                     setDynamicRecordToEdit(null); // Close the editing card
@@ -78,7 +78,7 @@ const CurrentProcessingTable = () => {
 
     const fetchProcessingData = () => {
         axiosInstance
-            .get(`${configManagerFE.getConfig('apiBaseUrl')}/api/processing`)
+            .get(`/api/processing`)
             .then((response) => {
                 setData(response.data);
                 setLoading(false);
@@ -94,7 +94,7 @@ const CurrentProcessingTable = () => {
     }, []);
 
     const handleExport = record => {
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/processing/${record.id}`, {
+        axiosInstance.get(`/api/processing/${record.id}`, {
             responseType: 'text', // This tells axios to expect a binary file response (like a CSV, PDF, etc.)
         })
             .then(response => {

@@ -14,7 +14,7 @@ const CurrentUsersTable = () => {
     const [dynamicRecordToEdit, setDynamicRecordToEdit] = useState({});
 
     const fetchUsers = async () => {
-        await axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/users`)
+        await axiosInstance.get(`/api/users`)
         .then((response)=> {
             setUsers(Array.isArray(response.data) ? response.data : [response.data]); 
             setLoading(false);
@@ -31,7 +31,7 @@ const CurrentUsersTable = () => {
 
     const handleDelete = async (record) => {
         try {
-            await axiosInstance.delete(`${configManagerFE.getConfig('apiBaseUrl')}/api/users/id/${record.id}`)
+            await axiosInstance.delete(`/api/users/id/${record.id}`)
             .then((response) => {
                 setUsers(prevDataSource => prevDataSource.filter(item => item.id !== record.id));
                 message.success(response.data.message);
@@ -47,7 +47,7 @@ const CurrentUsersTable = () => {
 
     const editRecord = async (record) => {
         try {
-            const response = await axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/users/id/${record.id}`);
+            const response = await axiosInstance.get(`/api/users/id/${record.id}`);
             setDynamicRecordToEdit(response.data);
         } catch (error) {
             handleErrorResponse(error); 
@@ -109,7 +109,7 @@ const CurrentUsersTable = () => {
             <div>
                 <DynamicEditableForm
                     inputData={dynamicRecordToEdit}
-                    apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/users/edit-user`}
+                    apiUrl={`/api/users/edit-user`}
                     httpMethod='PUT'
                     objectName={ `Editing User :  ${dynamicRecordToEdit.username||'Not Yet Selected'}` }
                     action='Update'

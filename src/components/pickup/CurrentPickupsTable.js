@@ -16,7 +16,7 @@ const CurrentPickupsTable = () => {
     
     const handleDelete = record => {
         console.log('record',record.id);
-        axiosInstance.delete(`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/${record.id}`)
+        axiosInstance.delete(`/api/pickup/${record.id}`)
             .then(response => {
                console.log('Delete status',response.status);
                setData(prevDataSource => prevDataSource.filter(item => item.id !== record.id));
@@ -31,7 +31,7 @@ const CurrentPickupsTable = () => {
 
     const editRecord = record => {
         console.log('record id receivd for editing : ',record.id);
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/${record.id}`)
+        axiosInstance.get(`/api/pickup/${record.id}`)
             .then(response => {
                console.log('Pickup received for editing',response.data);
                setdynamicRecordToEdit(response.data); 
@@ -44,7 +44,7 @@ const CurrentPickupsTable = () => {
     };
 
     const handleExport = record => {
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/${record.id}`, {
+        axiosInstance.get(`/api/pickup/${record.id}`, {
             responseType: 'text', // This tells axios to expect a binary file response (like a CSV, PDF, etc.)
         })
             .then(response => {
@@ -129,7 +129,7 @@ const CurrentPickupsTable = () => {
 
     useEffect(() => {
         // Replace 'your-api-url' with the actual API endpoint
-        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup`)
+        axiosInstance.get(`/api/pickup`)
             .then(response => {
                 setData(response.data);
                 setLoading(false);
@@ -155,7 +155,7 @@ const CurrentPickupsTable = () => {
        </div>
        <div>
           <div>
-                <DynamicEditableForm inputData={dynamicRecordToEdit} apiUrl={`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/`} httpMethod = {'PUT'}  objectName={dynamicRecordToEdit.connectionName} action={'Update'} />
+                <DynamicEditableForm inputData={dynamicRecordToEdit} apiUrl={`/api/pickup/`} httpMethod = {'PUT'}  objectName={dynamicRecordToEdit.connectionName} action={'Update'} />
           </div>
        </div>
     </> 

@@ -18,7 +18,7 @@ const LoginPage = ({ setUser }) => {
             const { username, password } = values;
 
             // Make API request to login user
-            const response = await axiosInstance.post(`${configManagerFE.getConfig('apiBaseUrl')}/api/iam/login`, { username, password });
+            const response = await axiosInstance.post(`/api/iam/login`, { username, password });
 
             // Check response status and structure
             if (response.status === 200 && response.data.token) {
