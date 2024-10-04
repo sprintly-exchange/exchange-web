@@ -22,7 +22,7 @@ const applyStoredColors = () => {
 applyStoredColors();
 
 console.log("Backend API url set to : ",`${configManagerFE.getConfig('apiBaseUrl')}`);
-
+console.log("APplication version : ",`${configManagerFE.getConfig('apiBaseUrl')}`);
 ReactDOM.render(
   <React.StrictMode>
     <GoogleOAuthProvider clientId="<318373981333-lu7p3vjpnjaf5vng9e5l302mh3qn57s4.apps.googleusercontent.com>">

@@ -4,10 +4,11 @@ import axiosInstance from '../utils/axiosConfig';
 const configManagerFE = (() => {
     // Load config from session storage or set default
     let config = JSON.parse(sessionStorage.getItem('appConfig')) || {
-        apiBaseUrl: window.REACT_APP_API_BASE_URL,
+        apiBaseUrl: `${process.env.REACT_APP_API_BASE_URL}`,
         theme: 'light',
         debugEnabled: false,
         dashboardDataDefaultFetchInterval: 10000,
+        appVersion: `${process.env.REACT_APP_APPLICATION_VERSION}`,
     };
 
     // Save config to session storage

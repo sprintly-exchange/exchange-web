@@ -31,7 +31,8 @@ import './components/utils/App.less';
 import './index.css';
 import UserManagement from './components/organization/UserManagement';
 import Processing from './components/processing/Processing';
-import config from './config'; // Import the config file
+import configManagerFE from './components/configuration/configManager';
+
 
 const { Header, Sider, Content } = Layout;
 
@@ -152,7 +153,7 @@ const App = () => {
               {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             </span>
             <div style={{ marginRight: '16px' }}>
-              Welcome, {user?.name}! <span style={{ marginLeft: '20px', fontSize: '12px', color: '#999' }}>Version: {config.version}</span>
+              Welcome, {user?.name}! <span style={{ marginLeft: '20px', fontSize: '12px', color: '#999' }}>Version: {configManagerFE.getConfig('appVersion')}</span>
             </div>
           </Header>
           <Content style={{ margin: '0 16px', overflow: 'auto' }}>
