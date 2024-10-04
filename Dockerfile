@@ -27,6 +27,7 @@ FROM node:14-alpine
 WORKDIR /usr/src/app
 
 # Set environment variable for build
+ARG REACT_APP_API_BASE_URL
 ENV REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL
 
 # Install a lightweight HTTP server to serve the production build
