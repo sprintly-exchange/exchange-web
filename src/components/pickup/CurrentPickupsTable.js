@@ -4,7 +4,7 @@ import axios from 'axios';
 import configManagerFE from '../configuration/configManager';
 import DynamicEditableForm from '../utils/DynamicEditableForm';
 import axiosInstance from '../utils/axiosConfig';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined,DownloadOutlined } from '@ant-design/icons';
 
 
 const { Title } = Typography;
@@ -41,6 +41,31 @@ const CurrentPickupsTable = () => {
                
             });
         
+    };
+
+    const handleExport = record => {
+        axiosInstance.get(`${configManagerFE.getConfig('apiBaseUrl')}/api/pickup/${record.id}`, {
+            responseType: 'text', // This tells axios to expect a binary file response (like a CSV, PDF, etc.)
+        })
+            .then(response => {
+                // Create a link element to download the file
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+
+                // Set the file name dynamically based on the record (e.g., using `connectionName`)
+                link.setAttribute('download', `${record.connectionName}_export.json`);
+                
+                // Append to the body, trigger the download and then remove the link element
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                message.success(`Export successful for record with ID ${record.id}`);
+            })
+            .catch(error => {
+                message.error(`Failed to export record with ID ${record.id}: ${error.message}`);
+            });
     };
 
     const columns = [
@@ -80,23 +105,23 @@ const CurrentPickupsTable = () => {
             ),
         },
         {
-            title: 'Action',
+            title: 'Actions',
             key: 'action',
             render: (text, record) => (
-                <DeleteOutlined
-                style={{ color: 'red', cursor: 'pointer', marginRight: 16 }}
-                onClick={() => handleDelete(record)}
-              />
-            ),
-        },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (text, record) => (
-                <EditOutlined
-                style={{ color: 'blue', cursor: 'pointer' }}
-                onClick={() => editRecord(record)}
-              />
+                <>
+                    <DeleteOutlined
+                        style={{ color: 'red', cursor: 'pointer', marginRight: 16 }}
+                        onClick={() => handleDelete(record)}
+                    />
+                    <EditOutlined
+                        style={{ color: 'blue', cursor: 'pointer', marginRight: 16 }}
+                        onClick={() => editRecord(record)}
+                    />
+                    <DownloadOutlined
+                        style={{ color: 'green', cursor: 'pointer' }}
+                        onClick={() => handleExport(record)}
+                    /> 
+                </>
             ),
         },
         // Add more columns as needed
