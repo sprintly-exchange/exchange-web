@@ -1,17 +1,19 @@
     import React, { Component, useEffect } from 'react';
     import { Table, Spin, message, Button, Select, Typography, DatePicker,Space,Input } from 'antd';
-    import { DownloadOutlined } from '@ant-design/icons';
+    import { DownloadOutlined,ExclamationCircleOutlined } from '@ant-design/icons';
     import axiosInstance from '../utils/axiosConfig';
     import configManagerFE from '../configuration/configManager';
     import DisplayBox from '../utils/DisplayBox';
     import { handleDownlaod } from './TransactionUtils';
+    import './TransactionTable.css';
+
     const { Text } = Typography;
 
     class CurrentTransactionsTable extends Component {
         constructor(props) {
             super(props);
             this.state = {
-                selectedItems: ['index', 'flowName','messageId','messageType' ,'processingTime', 'status', 'pickupName', 'senderId','downloadPI', 'deliveryName','receiverId','downloadDO'], // Default selected columns
+                selectedItems: ['index', 'flowName','messageId','messageType' ,'processingTime', 'status', 'pickupName', 'senderId','downloadPI', 'deliveryName','receiverId','downloadDO','processingError'], // Default selected columns
                 tempSelectedItems: [], // Temporary selection state
                 loading: true,
                 data: [],
@@ -239,9 +241,31 @@
                         <Button name="DO" onClick={() => this.downloadMessage(record, 'DO')} icon={<DownloadOutlined />} />
                     ),
                 },
+                {
+                    title: 'Processing Error',
+                    dataIndex: 'processingError',
+                    key: 'processingError',
+                    render: (text, record) => (
+                        <Button 
+                            type="link" 
+                            onClick={() => {
+                                this.setState({ transactionMessageDisplayContent: record.processingError });
+                                this.showModal();
+                            }}
+                            icon={<ExclamationCircleOutlined />}
+                        >
+                            
+                        </Button>
+                    ),
+                },
             ];
         }
 
+          // Function to apply the red background for rows with "ERROR" status
+        rowClassName = (record) => {
+            return record.status != 'SUCCESS' ? 'error-row' : 'success-row';
+        };
+        
         // Function to handle OK button click
         handleOk = () => {
             this.setState({ selectedItems: [...this.state.tempSelectedItems] }); // Update selectedItems with tempSelectedItems
@@ -547,6 +571,7 @@
                         scroll={{ x: 'max-content' }}
                         loading={loading}
                         onChange={this.onChange}
+                        rowClassName={this.rowClassName}
                     />
                     
                     <DisplayBox

@@ -1,0 +1,6 @@
+.error-row {
+    background-color: rgba(188, 98, 98, 0.1); /* Light red background for error rows */
+}
+.success-row {
+    background-color: rgba(122, 205, 122, 0.1); /* Light red background for error rows */
+}
