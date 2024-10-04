@@ -4,7 +4,7 @@ import axiosInstance from '../utils/axiosConfig';
 const configManagerFE = (() => {
     // Load config from session storage or set default
     let config = JSON.parse(sessionStorage.getItem('appConfig')) || {
-        apiBaseUrl: `${process.env.REACT_APP_API_BASE_URL}`,
+        apiBaseUrl: window.REACT_APP_API_BASE_URL,
         theme: 'light',
         debugEnabled: false,
         dashboardDataDefaultFetchInterval: 10000,
@@ -20,7 +20,7 @@ const configManagerFE = (() => {
     const saveConfigToBackend = async () => {
         try {   
             config.id= `${process.env.REACT_APP_ID}`;
-            await axiosInstance.post(`${process.env.REACT_APP_API_BASE_URL}/api/configuration/app`, config);
+            await axiosInstance.post(`${config.apiBaseUrl}/api/configuration/app`, config);
         } catch (error) {
             console.error('Error saving config to backend', error);
         }
@@ -29,7 +29,7 @@ const configManagerFE = (() => {
     // Load config from backend
     const loadConfigFromBackend = async () => {
         try {
-            const response = await axiosInstance.get(`${process.env.REACT_APP_API_BASE_URL}/api/configuration/app/${process.env.REACT_APP_ID}`);
+            const response = await axiosInstance.get(`${config.apiBaseUrl}/api/configuration/app/${process.env.REACT_APP_ID}`);
             config = response.data;
             saveConfigToSession();
         } catch (error) {
