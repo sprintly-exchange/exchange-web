@@ -28,6 +28,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/exchange-web:latest-amd64
-            ${{ secrets.DOCKER_HUB_USERNAME }}/exchange-web:latest-arm64
+            ${{ secrets.DOCKER_HUB_USERNAME }}/exchange-web:latest
           platforms: linux/amd64,linux/arm64
