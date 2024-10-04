@@ -5,6 +5,7 @@ import App from './App'; // Main App component
 import './global.css';
 import './components/utils/App.less';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import configManagerFE from './components/configuration/configManager';
 
 
 // Rendering the App component into the root div
@@ -19,6 +20,8 @@ const applyStoredColors = () => {
 };
 
 applyStoredColors();
+
+console.log("Backend API url set to : ",`${configManagerFE.getConfig('apiBaseUrl')}`);
 
 ReactDOM.render(
   <React.StrictMode>
