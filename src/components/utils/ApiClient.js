@@ -16,7 +16,8 @@ export class ApiClient {
 
       return response.data;
     } catch (error) {
-      console.error('error', error);
+      message.error(error.response.data.message);
+      //console.error('error', error);
     }
   }
 
@@ -32,7 +33,8 @@ export class ApiClient {
 
       return response.data;
     } catch (error) {
-      console.error('error', error);
+      message.error(error.response.data.message);
+      //console.error('error', error);
     }
   }
 }

@@ -56,8 +56,9 @@ const Processing = () => {
       message.success(`Processing record created successfully with ID: ${response.data.id}`);
     } catch (error) {
       // Handle error response
-      message.error('Error creating processing record. Please try again.');
-      console.error('Error creating processing record:', error);
+      message.error(error.response.data.message);
+      //message.error('Error creating processing record. Please try again.');
+      //console.error('Error creating processing record:', error);
     } finally {
       setLoading(false); // Hide loading spinner
     }
