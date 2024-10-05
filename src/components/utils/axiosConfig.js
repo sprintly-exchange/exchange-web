@@ -5,8 +5,10 @@ import axios from 'axios';
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: `${process.env.REACT_APP_API_BASE_URL}`, // Replace with your API base URL
+  baseURL: process.env.REACT_APP_API_BASE_URL, // Replace with your API base URL
 });
+
+console.log("API BASE URL:", process.env.REACT_APP_API_BASE_URL);
 
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
