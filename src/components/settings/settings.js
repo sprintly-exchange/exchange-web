@@ -4,6 +4,7 @@ import { Button, Select } from 'antd';
 import './../utils/App.less'; // Ensure you import your less file
 import '../../global.css';
 import userConfigManager from '../configuration/userConfigManager';
+import SystemSettings from './SystemSettings';
 
 const { Option } = Select;
 
@@ -83,6 +84,10 @@ const Settings = () => {
         OK
       </Button>
       <Button onClick={handleSetDefaultColors}>Set Default Colors</Button>
+
+      <div>
+        <SystemSettings></SystemSettings>
+      </div>
     </div>
   );
 };
