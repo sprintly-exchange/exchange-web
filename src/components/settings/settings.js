@@ -84,10 +84,6 @@ const Settings = () => {
         OK
       </Button>
       <Button onClick={handleSetDefaultColors}>Set Default Colors</Button>
-
-      <div>
-        <SystemSettings></SystemSettings>
-      </div>
     </div>
   );
 };

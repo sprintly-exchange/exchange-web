@@ -4,6 +4,7 @@ import axios from 'axios';
 import configManagerFE from '../configuration/configManager';
 import axiosInstance from '../utils/axiosConfig';
 import Settings from '../settings/settings';
+import SystemSettings from '../settings/SystemSettings';
 
 const { Title } = Typography;
 
@@ -55,16 +56,16 @@ const AdminConfig = () => {
 
     return (
         <>
+            <Settings></Settings>
             {user.name === 'Admin' && (
                 <div>
                     <Typography.Title level={3} >Configuration Management </Typography.Title>
                     <Title level={5} >Enable Demo Mode: <Switch style={{ paddingTop:10,backgroundColor: `${configManagerFE.getConfig('globalColorButtonBackground')}`}} value={enabled} onChange={demoModeChange} /></Title>
                     <Title level={5} >Dashboard Fetch Interval(ms): <Input  name="dashboardDataDefaultFetchInterval" onPressEnter={updateConfig} autoSize={{ minRows: 1, maxRows: 2 }} defaultValue={configManagerFE.getConfig('dashboardDataDefaultFetchInterval')} /></Title>
+                    <SystemSettings></SystemSettings>
                 </div>
             )}
-            <div>
-                <Settings />
-            </div>
+            
         </>
     )
 }
