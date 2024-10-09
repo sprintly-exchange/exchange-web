@@ -68,7 +68,7 @@ const App = () => {
         <Sider trigger={null} collapsible collapsed={collapsed} style={{ width: '10%' }}>
           <div style={{ padding: '16px', display: 'flex', alignItems: 'center', background: 'inherit' }}>
             <img src="sprintly.png" alt="Company Logo" style={{ width: '40px', height: '40px', marginBottom: '8px' }} />
-            {!collapsed && <div style={{ color: 'white', fontWeight: 'bold', marginBottom: '-4px' }}>printly</div>}
+            {!collapsed && <div style={{ color: 'white', fontWeight: 'bold', marginBottom: '-4px' }}>Sprintly</div>}
           </div>
           <div className="demo-logo-vertical" />
           <Menu
