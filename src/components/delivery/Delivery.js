@@ -15,6 +15,7 @@ import {
   websocketTemplate,
   partnerFinanceGroupSE,
   fsTemplate,
+  mqttTemplate,
 } from '../protooclTemplates/protocolTemplates.js';
 import configManagerFE from '../configuration/configManager';
 
@@ -60,7 +61,10 @@ const Delivery = () => {
         break;   
       case 'partnerFinanceGroupSE':
         setCurrentForm('partnerFinanceGroupSE');
-        break;     
+        break;
+      case 'mqttTemplate':
+        setCurrentForm('mqttTemplate');
+        break;          
       default:
     }
   };
@@ -100,6 +104,10 @@ const Delivery = () => {
               {
                 value: 'kafkaTemplate',
                 label: 'KAFKA Connection',
+              },
+              {
+                value: 'mqttTemplate',
+                label: 'MQTT Connection',
               },
             ]}
           >
@@ -203,6 +211,15 @@ const Delivery = () => {
               apiUrl={`/api/delivery/`}
               httpMethod={'POST'}
               objectName={'Connect to Finance Group(Sweden)'}
+              action={'Create'}
+            />
+          )}
+          {currentForm === 'mqttTemplate' && (
+            <DynamicEditableForm
+              inputData={mqttTemplate}
+              apiUrl={`/api/delivery/`}
+              httpMethod={'POST'}
+              objectName={'mqttTemplate'}
               action={'Create'}
             />
           )}

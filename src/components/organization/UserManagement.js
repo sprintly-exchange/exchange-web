@@ -162,7 +162,7 @@ function UserManagement() {
           <Form.Item name="email" label="Email" rules={[{ required: true, message: 'Please input the email!', type: 'email' }]}>
             <Input />
           </Form.Item>
-          <Form.Item label="Mobile Number" required>
+          <Form.Item name="mobileNumber" label="Mobile Number" required>
             <Row gutter={8}>
               <Col span={8}>
                 <Select

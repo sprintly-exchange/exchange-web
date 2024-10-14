@@ -15,6 +15,7 @@ import {
   sftpTemplate,
   websocketTemplate,
   fsTemplate,
+  mqttTemplate,
 } from '../protooclTemplates/protocolTemplates.js';
 
 const { Title } = Typography;
@@ -56,7 +57,10 @@ const Pickup = () => {
         break;      
       case 'websocketTemplate':
         setCurrentForm('websocketTemplate');
-        break;      
+        break;   
+      case 'mqttTemplate':
+        setCurrentForm('mqttTemplate');
+        break;    
       default:
     }
   };
@@ -90,6 +94,10 @@ const Pickup = () => {
               {
                 value: 'kafkaTemplate',
                 label: 'KAFKA Connection',
+              },
+              {
+                value: 'mqttTemplate',
+                label: 'MQTT Connection',
               },
             ]}
           >
@@ -183,6 +191,15 @@ const Pickup = () => {
               apiUrl={`/api/pickup/`}
               httpMethod={'POST'}
               objectName={'WebSocket'}
+              action={'Create'}
+            />
+          )}
+          {currentForm === 'mqttTemplate' && (
+            <DynamicEditableForm
+              inputData={mqttTemplate}
+              apiUrl={`/api/pickup/`}
+              httpMethod={'POST'}
+              objectName={'MQTT'}
               action={'Create'}
             />
           )}

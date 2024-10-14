@@ -178,5 +178,26 @@ export const partnerFinanceGroupSE = {
 };
 
 
+export const mqttTemplate = {
+  "connectionName": "MQTT Connection",
+  "host": "mqtt.hostname.com",
+  "port": 1883, // Default port for MQTT is 1883, or 8883 for secure (SSL/TLS)
+  "protocol": "MQTT", // Could be "MQTT" or "MQTTS" (for secure connection)
+  "retryInterval": 5000, // Retry interval in milliseconds
+  "retryAttempts": 3, // Number of retry attempts before failing
+  "authenticationType": "basicAuth", // Options: "basicAuth", "certificate", or "none"
+  "userName": "User Name", // For basic authentication
+  "password": "password", // For basic authentication
+  "clientId": "mqtt-client-id", // Unique ID for the MQTT client
+  "keepAliveInterval": 60, // Keep-alive interval in seconds
+  "cleanSession": true, // Set to true to clear the session on disconnect
+  "topic": "/topic/path", // The topic to subscribe or publish to
+  "qos": 1, // Quality of Service level: 0 (at most once), 1 (at least once), 2 (exactly once)
+  "retain": false, // Retain messages or not
+  "secure": false, // Set to true for MQTTS (secure)
+  "timeout": 30000 // Timeout in milliseconds for connection attempts
+};
+
+
 
 
