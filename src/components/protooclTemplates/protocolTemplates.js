@@ -182,14 +182,10 @@ export const mqttTemplate = {
   "connectionName": "MQTT Connection",
   "host": "mqtt.hostname.com",
   "port": 1883, // Default port for MQTT is 1883, or 8883 for secure (SSL/TLS)
-  "protocol": "MQTT", // Could be "MQTT" or "MQTTS" (for secure connection)
-  "retryInterval": 5000, // Retry interval in milliseconds
-  "retryAttempts": 3, // Number of retry attempts before failing
-  "authenticationType": "basicAuth", // Options: "basicAuth", "certificate", or "none"
+  "protocol": ["MQTT", "MQTTS"], // Could be "MQTT" or "MQTTS" (for secure connection)
+  "reconnectPeriod": 4000, // ReconnectPeriod interval in milliseconds
   "userName": "User Name", // For basic authentication
   "password": "password", // For basic authentication
-  "clientId": "mqtt-client-id", // Unique ID for the MQTT client
-  "keepAliveInterval": 60, // Keep-alive interval in seconds
   "cleanSession": true, // Set to true to clear the session on disconnect
   "topic": "/topic/path", // The topic to subscribe or publish to
   "qos": 1, // Quality of Service level: 0 (at most once), 1 (at least once), 2 (exactly once)
