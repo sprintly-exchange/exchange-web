@@ -186,11 +186,11 @@ export const mqttTemplate = {
   "reconnectPeriod": 4000, // ReconnectPeriod interval in milliseconds
   "userName": "User Name", // For basic authentication
   "password": "password", // For basic authentication
-  "cleanSession": true, // Set to true to clear the session on disconnect
+  "cleanSession": ['false','true'], // Set to true to clear the session on disconnect
   "topic": "/topic/path", // The topic to subscribe or publish to
   "qos": 1, // Quality of Service level: 0 (at most once), 1 (at least once), 2 (exactly once)
-  "retain": false, // Retain messages or not
-  "secure": false, // Set to true for MQTTS (secure)
+  "retain": ['false','true'], // Retain messages or not
+  "secure": ['false','true'], // Set to true for MQTTS (secure)
   "timeout": 30000 // Timeout in milliseconds for connection attempts
 };
 

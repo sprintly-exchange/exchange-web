@@ -101,7 +101,7 @@ const CurrentPickupsTable = () => {
             title: 'Path',
             dataIndex: 'basePath',
             render: (text, record) => (
-                <span>{record.basePath || record.remotePath || record.path }</span> //use base path(HTTP) or remote path(FTP) or path(File system)
+                <span>{record.basePath || record.remotePath || record.path  || record.topic  }</span> //use base path(HTTP) or remote path(FTP) or path(File system)
             ),
         },
         {
