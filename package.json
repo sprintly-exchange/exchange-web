@@ -25,6 +25,7 @@
     "react-router-dom": "^6.23.1",
     "react-scripts": "^5.0.1",
     "react-select-country-list": "^2.2.3",
+    "recharts": "^2.13.0",
     "sass": "^1.79.4",
     "typescript": "^3.9.10",
     "uuid": "^9.0.1",

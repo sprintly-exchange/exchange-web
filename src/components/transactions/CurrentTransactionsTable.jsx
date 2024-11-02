@@ -479,7 +479,17 @@
             }
           };
 
-        
+        expandedRowRender = (record) => {
+            // Filter child records based on parentId
+            const children = this.state.data.filter(curr => record.id === curr.id);
+            return (
+              <Table
+                columns={this.columns}
+                dataSource={children}
+                pagination={false} // No pagination for child rows
+              />
+            );
+          };
 
         render() {
             const { loading, data, tempSelectedItems, selectedItems, sliderValueRelativeRangeMin, transactionMessageDisplayContent } = this.state;
@@ -567,6 +577,10 @@
                     <Table
                         dataSource={data}
                         columns={this.columns.filter(column => selectedItems.includes(column.key))}
+                        expandable={{
+                            expandedRowRender: this.expandedRowRender,
+                            rowExpandable: (record) => record.id !== '', // Only allow expansion if there are children
+                          }}
                         rowKey="index"
                         scroll={{ x: 'max-content' }}
                         loading={loading}
