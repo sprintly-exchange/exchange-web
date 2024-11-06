@@ -105,6 +105,13 @@ const CurrentPickupsTable = () => {
             ),
         },
         {
+            title: 'Used By Flow',
+            dataIndex: 'isUsed',
+            render: (text, record) => (
+                <span>{ record.isUsed && record.flowName ? record.flowName : 'Not in use'}</span> //use base path(HTTP) or remote path(FTP) or path(File system)
+            ),
+        },
+        {
             title: 'Actions',
             key: 'action',
             render: (text, record) => (
