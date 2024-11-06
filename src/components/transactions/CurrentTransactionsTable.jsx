@@ -479,7 +479,7 @@
 
         expandedRowRender = (record) => {
             // Filter child records based on parentId
-            const children = this.state.data.filter(curr => record.id === curr.id);
+            const children = this.state.data.filter(curr => record.parentId === curr.id);
             return (
               <Table
                 columns={this.columns}
@@ -577,7 +577,7 @@
                         columns={this.columns.filter(column => selectedItems.includes(column.key))}
                         expandable={{
                             expandedRowRender: this.expandedRowRender,
-                            rowExpandable: (record) => record.id !== '', // Only allow expansion if there are children
+                            rowExpandable: (record) => record.parentId && record.parentId.includes('-'), // Only allow expansion if there are children
                           }}
                         rowKey="index"
                         scroll={{ x: 'max-content' }}
