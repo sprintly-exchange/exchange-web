@@ -224,7 +224,6 @@
                     sorter: (a, b) => a.receiverId.localeCompare(b.receiverId),
                     filters: [],
                     onFilter: (value, record) => record.receiverId.indexOf(value) === 0,
-                    sorter: (a, b) => a.receiverId.localeCompare(b.receiverId),
                     sortDirections: ['descend', 'ascend'],
                 },
                 {
@@ -261,9 +260,8 @@
             ];
         }
 
-          // Function to apply the red background for rows with "ERROR" status
         rowClassName = (record) => {
-            return record.status != 'SUCCESS' ? 'error-row' : 'success-row';
+            return record.status.toUpperCase() !== 'SUCCESS' ? 'error-row' : 'success-row';
         };
         
         // Function to handle OK button click
