@@ -7,7 +7,7 @@ const configManagerFE = (() => {
         theme: 'light',
         debugEnabled: false,
         dashboardDataDefaultFetchInterval: 10000,
-        appVersion: 'V1.0.9',
+        appVersion: 'V1.1.0',
     };
 
     // Save config to session storage
