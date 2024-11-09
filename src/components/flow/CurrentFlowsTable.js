@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Spin, message, Typography, Button, Modal, Row, Col} from 'antd';
-import axios from 'axios';
-import configManagerFE from '../configuration/configManager';
 import DynamicEditableForm from '../utils/DynamicEditableForm';
 import axiosInstance from '../utils/axiosConfig';
-import { render } from 'less';
 import { DeleteOutlined, EditOutlined, CheckCircleOutlined, StopOutlined, DownloadOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
@@ -128,6 +125,12 @@ const CurrentFlowsTable = () => {
             title: 'Delivery Name',
             dataIndex: 'deliveryName',
             key: 'deliveryName',
+        },
+        ,
+        {
+            title: 'Processing Name',
+            dataIndex: 'processingName',
+            key: 'processingName',
         },
         {
             title: 'Activation Status',

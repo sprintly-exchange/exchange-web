@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Select, Spin, message } from 'antd';
-import configManagerFE from '../configuration/configManager';
+import { Select, Spin } from 'antd';
 import axiosInstance from '../utils/axiosConfig';
 
-import axios from 'axios';
-
+/*
+  Used to download the pickp and deliveries from API server to provide options to create a new flow
+*/
 const { Option } = Select;
 
 const DynamicSelect = ({fetchUrl, selectTypeText,onDataChange,componentId}) => {
