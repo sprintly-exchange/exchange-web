@@ -63,6 +63,10 @@
                     dataIndex: 'processingTime',
                     key: 'processingTime',
                     defaultChecked: true,
+                    render: (utcDate) => {
+                        const localDate = new Date(utcDate).toLocaleString(); // Converts UTC to local time
+                        return localDate;
+                    },
                 },
                 {
                     title: 'Overall Status',
@@ -289,6 +293,9 @@
         };
 
         setStartAndEndDate = (start, end) => {
+            console.log('curr', new Date().getTime());
+            console.log('start', start);
+            console.log('end', end);
             this.setState({ startDate: start, endDate: end });
         };
 
@@ -304,6 +311,8 @@
         downloadData = () => {
             this.setState({ loading: true });
             const { startDate, endDate } = this.state;
+            console.log(startDate,endDate);
+            console.log(new Date(startDate).toISOString(),new Date(endDate).toISOString());
         
             // Ensure the correct API endpoint is used here
             const url = `/api/transactions/search?start=${startDate}&end=${endDate}&startDate=${new Date(startDate).toISOString()}&endDate=${new Date(endDate).toISOString()}`;
@@ -536,14 +545,26 @@
                             placeholder="Start Date"
                             showTime
                             format="YYYY-MM-DD HH:mm:ss"
-                            onChange={(date) => this.setStartAndEndDate(date ? date.toDate().getTime() : null, this.state.endDate)}
+                            onChange={(date) => 
+                                this.setStartAndEndDate(
+                                    date ? date.toDate().getTime() - date.toDate().getTimezoneOffset() * 60000 : null, 
+                                    this.state.endDate
+                                )
+                            }
                         />
+
                         <DatePicker
                             placeholder="End Date"
                             showTime
                             format="YYYY-MM-DD HH:mm:ss"
-                            onChange={(date) => this.setStartAndEndDate(this.state.startDate, date ? date.toDate().getTime() : null)}
+                            onChange={(date) => 
+                                this.setStartAndEndDate(
+                                    this.state.startDate, 
+                                    date ? date.toDate().getTime() - date.toDate().getTimezoneOffset() * 60000 : null
+                                )
+                            }
                         />
+
                         <Button type="primary" onClick={this.downloadData}>
                             Search Between Dates
                         </Button>
