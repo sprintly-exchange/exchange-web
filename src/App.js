@@ -32,7 +32,7 @@ import './index.css';
 import UserManagement from './components/organization/UserManagement';
 import Processing from './components/processing/Processing';
 import configManagerFE from './components/configuration/configManager';
-
+import Home from './Home';
 
 const { Header, Sider, Content } = Layout;
 
@@ -181,7 +181,8 @@ const App = () => {
       <Routes>
         {!user ? (
           <>
-            <Route path="/" element={<Navigate to="/signup" />} />
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/signup" element={<SignUpPage setUser={setUser} />} />
             <Route path="/login" element={<LoginPage setUser={setUser} />} />
           </>
