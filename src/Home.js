@@ -93,7 +93,7 @@ function Home() {
             <section style={{
                         width: '100%',          // Ensure it takes up the full width of the container
                         height: 'auto',         // Auto height to maintain aspect ratio
-                        maxWidth: '800px',      // Max width to make sure it's not too large on bigger screens
+                        maxWidth: 'auto',      // Max width to make sure it's not too large on bigger screens
                         aspectRatio: '16 / 9',  // Maintain a 16:9 aspect ratio for the embedded videos
                         overflow: 'hidden',
                         borderRadius: '8px',
