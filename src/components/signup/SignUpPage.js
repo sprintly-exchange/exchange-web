@@ -9,8 +9,7 @@ import configManagerFE from '../configuration/configManager';
 import axiosInstance from '../utils/axiosConfig';
 import userConfigManager from '../configuration/userConfigManager';
 import { applyStoredColors } from '../utils/commonUtils';
-import YouTubeChannelLink from '../media/YouTubeChannelLink';
-import YouTubeChannelVideos from '../media/YouTubeChannelLink';
+//import YouTubeChannelVideos from '../media/YouTubeChannelLink';
 
 const { Header, Content } = Layout;
 
@@ -168,7 +167,7 @@ const SignUpPage = ({ setUser }) => {
                         </GoogleOAuthProvider>
                 </div>
                 <div>
-                {{/*<YouTubeChannelVideos></YouTubeChannelVideos>*/}}
+                {/*<YouTubeChannelVideos></YouTubeChannelVideos>*/}
                 </div>
             </Content>
         </Layout>
