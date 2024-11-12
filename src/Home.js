@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import YouTubeChannelVideos from './components/media/YouTubeChannelLink';
 
 function Home() {
     const navigate = useNavigate();
@@ -8,12 +9,31 @@ function Home() {
         navigate('/signup');
     };
 
+    React.useEffect(() => {
+        // Apply styles globally for scrolling
+        const style = document.createElement('style');
+        style.innerHTML = `
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow-y: auto; /* Ensure vertical scrolling */
+            }
+        `;
+        document.head.appendChild(style);
+        
+        return () => {
+            // Clean up styles when component unmounts
+            document.head.removeChild(style);
+        };
+    }, []);
+    
     return (
         <div style={{
-            minHeight: '100vh',    // Ensure the container takes up at least the full viewport height
-            overflowY: 'auto',     // Enable vertical scrolling if the content exceeds the viewport
+            height: '100%',    // Ensure the container takes up the full height
+            display: 'flex',
+            flexDirection: 'column',
         }}>
-
             {/* Hero Section */}
             <section className="hero" style={{
                 background: "url('hero-bg.jpg') center/cover no-repeat",
@@ -45,6 +65,7 @@ function Home() {
                 padding: '2rem',
                 justifyContent: 'center',
                 backgroundColor: '#f9f9f9',
+                flexGrow: 1,  // This ensures that this section takes up available space
             }}>
                 {["image1.png", "image2.png", "image3.png"].map((image, index) => (
                     <div key={index} className="feature" style={{
@@ -68,6 +89,18 @@ function Home() {
                     </div>
                 ))}
             </section>
+            
+            <section style={{
+                        width: '100%',          // Ensure it takes up the full width of the container
+                        height: 'auto',         // Auto height to maintain aspect ratio
+                        maxWidth: '800px',      // Max width to make sure it's not too large on bigger screens
+                        aspectRatio: '16 / 9',  // Maintain a 16:9 aspect ratio for the embedded videos
+                        overflow: 'hidden',
+                        borderRadius: '8px',
+                    }}>
+                <YouTubeChannelVideos></YouTubeChannelVideos>
+            </section>
+            
 
             {/* Footer Section */}
             <footer style={{
@@ -115,7 +148,9 @@ function Home() {
                     }
                 }
             `}</style>
+
         </div>
+        
     );
 }
 

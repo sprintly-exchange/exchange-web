@@ -168,7 +168,7 @@ const SignUpPage = ({ setUser }) => {
                         </GoogleOAuthProvider>
                 </div>
                 <div>
-                <YouTubeChannelVideos></YouTubeChannelVideos>
+                {{/*<YouTubeChannelVideos></YouTubeChannelVideos>*/}}
                 </div>
             </Content>
         </Layout>
