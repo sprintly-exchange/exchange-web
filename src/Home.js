@@ -39,11 +39,9 @@ function Home() {
                 background: "url('hero-bg.jpg') center/cover no-repeat",
                 color: '#fff',
                 textAlign: 'center',
-                padding: '5rem 1rem',
+                padding: '1rem 1rem',
             }}>
-                <h1>Welcome to Sprinlty Exchange</h1>
-                <p>We provide B2B and B2C integation services, tailored and customized to your business needs. We take the responsibility for digitial message trasnformation ensuring your business to run smoothly.</p>
-               
+                <h1>Welcome to Sprinlty Exchange</h1><br></br>
                    <button className="btn"
                     onClick={handleGetStartedClick}
                     style={{
@@ -57,7 +55,7 @@ function Home() {
                     Get Started
                 </button>
                 <p>
-                    <strong>Contact Us:</strong> Email: <a href="mailto:info@sprintly-exchange.com" style={{ color: '#fff', textDecoration: 'underline' }}>info@sprintly-exchange.com</a>, Phone: +76 76 033 4777
+                    <strong>Contact Us:</strong> Email: <a href="mailto:info@sprintly-exchange.com" style={{ color: '#fff', textDecoration: 'underline' }}>info@sprintly-exchange.com</a>, Phone: +4676 033 4777
                 </p>
 
                         </section>
@@ -67,7 +65,7 @@ function Home() {
                 display: 'flex',
                 flexWrap: 'wrap',
                 gap: '2rem',
-                padding: '2rem',
+                padding: '1rem',
                 justifyContent: 'center',
                 backgroundColor: '#f9f9f9',
                 flexGrow: 1,  // This ensures that this section takes up available space
