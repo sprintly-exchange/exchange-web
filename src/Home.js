@@ -42,8 +42,9 @@ function Home() {
                 padding: '5rem 1rem',
             }}>
                 <h1>Welcome to Sprinlty Exchange</h1>
-                <p>Discover, engage, and connect with everything we offer. We’re excited to have you here!</p>
-                <button className="btn"
+                <p>We provide B2B and B2C integation services, tailored and customized to your business needs. We take the responsibility for digitial message trasnformation ensuring your business to run smoothly.</p>
+               
+                   <button className="btn"
                     onClick={handleGetStartedClick}
                     style={{
                         backgroundColor: '#fff',
@@ -55,7 +56,11 @@ function Home() {
                     }}>
                     Get Started
                 </button>
-            </section>
+                <p>
+                    <strong>Contact Us:</strong> Email: <a href="mailto:info@sprintly-exchange.com" style={{ color: '#fff', textDecoration: 'underline' }}>info@sprintly-exchange.com</a>, Phone: +76 76 033 4777
+                </p>
+
+                        </section>
 
             {/* Featured Sections */}
             <section className="features" style={{
