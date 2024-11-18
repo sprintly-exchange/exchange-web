@@ -54,9 +54,7 @@ function Home() {
                     }}>
                     Get Started
                 </button>
-                <p>
-                    <strong>Contact Us:</strong> Email: <a href="mailto:info@sprintly-exchange.com" style={{ color: '#fff', textDecoration: 'underline' }}>info@sprintly-exchange.com</a>, Phone: +4676 033 4777
-                </p>
+              
 
                         </section>
 
@@ -114,6 +112,10 @@ function Home() {
                 marginTop: '2rem',
             }}>
                 <p>&copy; 2024 Sprinlty Exchange. All rights reserved.</p>
+                <p>
+                    <strong>Contact Us:</strong> 
+                    Email: <a href="mailto:info@sprintly-exchange.com" style={{ color: '#fff', textDecoration: 'underline' }}>info@sprintly-exchange.com</a> Phone: +4676 033 4777
+                </p>
             </footer>
 
             {/* Responsive Styling */}
