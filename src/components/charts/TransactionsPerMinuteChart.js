@@ -42,8 +42,8 @@ const TransactionsPerMinuteChart = () => {
       const labelValues = [];
       const dataValues = [];
 
-      resultArray.forEach(([key, value]) => {
-        labelValues.push(key);
+      resultArray.forEach(([timestamp, value]) => {
+        labelValues.push(new Date(timestamp).toLocaleString());
         dataValues.push(parseInt(value, 10));
       });
 

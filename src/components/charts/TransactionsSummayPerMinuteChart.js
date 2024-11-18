@@ -24,7 +24,7 @@ async function updateStat() {
     const flowCounts = [];
 
     for (const [timestamp, flows] of Object.entries(response.data)) {
-      timestamps.push(timestamp);
+      timestamps.push(new Date(timestamp).toLocaleString());
       flowCounts.push(flows);
     }
 
