@@ -64,7 +64,7 @@
                     key: 'processingTime',
                     defaultChecked: true,
                     render: (utcDate) => {
-                        const localDate = new Date(utcDate).toLocaleString(); // Converts UTC to local time
+                        const localDate = new Date(utcDate).toLocaleString().replace(',', ''); // Converts UTC to local time
                         return localDate;
                     },
                 },
