@@ -52,16 +52,17 @@ const DynamicEditableForm = ({ inputData, apiUrl, httpMethod, objectName, action
   }, [inputData, form]);
 
   const onFinish = (values) => {
-    // Merge the hidden fields with form values
-    const nestedData = unflattenObject({
-      ...values,
-      ...hiddenFields, // Add hidden fields to the submission
-    });
-
-    console.log('Updated JSON object:', nestedData);
-    setData(flattenObject(nestedData));
-    new ApiClient().updateData(apiUrl, nestedData, httpMethod);
-    setEditWindowEnabled(false);
+    if(values.id !== undefined) {
+       // Merge the hidden fields with form values
+      const nestedData = unflattenObject({
+        ...values,
+        ...hiddenFields, // Add hidden fields to the submission
+      });
+      setData(flattenObject(nestedData));
+      new ApiClient().updateData(apiUrl, nestedData, httpMethod);
+      setEditWindowEnabled(false);
+    }
+   
   };
 
   const onCancel = () => {
