@@ -52,7 +52,7 @@ const DynamicEditableForm = ({ inputData, apiUrl, httpMethod, objectName, action
   }, [inputData, form]);
 
   const onFinish = (values) => {
-    if(hiddenFields.id !== undefined) {
+    if(hiddenFields.id !== undefined || values.connectionName) {
        // Merge the hidden fields with form values
       const nestedData = unflattenObject({
         ...values,
