@@ -166,10 +166,10 @@ const CurrentFlowsTable = () => {
                         style={{ color: 'blue', cursor: 'pointer', marginRight: 16  }}
                         onClick={() => editRecord(record)}
                     />
-                    <DownloadOutlined
+                    {/*<DownloadOutlined
                         style={{ color: 'green', cursor: 'pointer' }}
                         onClick={() => handleExport(record)}
-                    /> 
+                    />*/}
                 </>
             ),
         }
