@@ -16,6 +16,7 @@ import {
   UsergroupDeleteOutlined,
   HomeOutlined,
   SyncOutlined,
+  EuroOutlined
 } from '@ant-design/icons';
 import AdminConfig from './components/admin/AdminConfig';
 import DashBoard from './components/dashboard/DashBoard';
@@ -26,6 +27,8 @@ import Flows from './components/flow/Flows';
 import SignUpPage from './components/signup/SignUpPage';
 import LoginPage from './components/Login/LoginPage';
 import OrganizationManagement from './components/organization/OrganizationManagement';
+import InvoicePage from './components/InvoiceUploader/InvoicePage';
+
 import './global.css';
 import './components/utils/App.less';
 import './index.css';
@@ -87,6 +90,11 @@ const App = () => {
                 key: '/dashboard',
                 icon: <DashboardOutlined />,
                 label: 'Dashboard',
+              },
+              {
+                key: '/invoices',
+                icon: <EuroOutlined />,
+                label: 'Invoices',
               },
               {
                 key: '/transaction',
@@ -168,7 +176,9 @@ const App = () => {
               <Route path="/admin" element={<AdminConfig />} />
               <Route path="/organizations" element={<OrganizationManagement />} />
               <Route path="/users" element={<UserManagement />} />
+              <Route path="/invoices" element={<InvoicePage />} />
               <Route path="*" element={<Navigate to="/dashboard" />} />
+              
             </Routes>
           </Content>
         </Layout>
