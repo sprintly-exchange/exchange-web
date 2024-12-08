@@ -36,8 +36,9 @@ const InvoiceUploader = () => {
         },
       });
 
-      if (response.status === 200) {
+      if (response.status === 200 ||response.status === 201  ) {
         setUploadStatus("Invoice uploaded successfully!");
+        fetchInvoiceStatuses();
         message.success("Invoice uploaded successfully!");
       }
     } catch (error) {
@@ -66,6 +67,11 @@ const InvoiceUploader = () => {
       key: "id",
     },
     {
+      title: "File Name",
+      dataIndex: "fileName",
+      key: "fileName",
+    },
+    {
       title: "Status",
       dataIndex: "status",
       key: "status",
@@ -80,7 +86,7 @@ const InvoiceUploader = () => {
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h1>Invoice Uploader</h1>
+      <h1>Upload Invoices</h1>
       <div style={{ marginBottom: "20px" }}>
         <Upload beforeUpload={() => false} onChange={handleFileChange} showUploadList={false}>
           <Button icon={<UploadOutlined />}>Select Invoice</Button>
@@ -96,7 +102,7 @@ const InvoiceUploader = () => {
       </div>
       {uploadStatus && <p>{uploadStatus}</p>}
 
-      <h2>Delivery Statuses</h2>
+      <h2>Invoice Delivery/Processing Statuses</h2>
       <Button
         type="default"
         icon={<ReloadOutlined />}
