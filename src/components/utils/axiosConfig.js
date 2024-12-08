@@ -1,7 +1,4 @@
-// src/axiosConfig.js
-
 import axios from 'axios';
-
 
 // Create an Axios instance
 const axiosInstance = axios.create({
@@ -13,7 +10,7 @@ console.log("API BASE URL:", process.env.REACT_APP_API_BASE_URL);
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Get the token from local storage
+    // Get the token from session storage
     const token = sessionStorage.getItem('token');
     if (token) {
       // If token exists, set it to the Authorization header
@@ -22,19 +19,24 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
-    // Do something with request error
+    // Handle request error
     return Promise.reject(error);
   }
 );
 
-// Optionally, you can add a response interceptor as well
+// Add a response interceptor
 axiosInstance.interceptors.response.use(
   (response) => {
-    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Any status code within the range of 2xx triggers this function
     return response;
   },
   (error) => {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Check if the error response status is 401 (Unauthorized)
+    if (error.response && error.response.status === 401) {
+      // Redirect to the home page for login
+      window.location.href = '/home';
+    }
+    // Handle other errors
     return Promise.reject(error);
   }
 );
