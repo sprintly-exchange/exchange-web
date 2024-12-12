@@ -25,7 +25,7 @@ axiosInstance.interceptors.request.use(
 );
 
 // Add a response interceptor
-axiosInstance.interceptors.response.use(
+axiosInstance.interceptors.response.use(  
   (response) => {
     // Any status code within the range of 2xx triggers this function
     return response;
@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
     // Check if the error response status is 401 (Unauthorized)
     if (error.response && error.response.status === 401) {
       // Redirect to the home page for login
-      window.location.href = '/home';
+      window.location.href = '/signup';
     }
     // Handle other errors
     return Promise.reject(error);
