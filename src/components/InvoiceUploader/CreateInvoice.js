@@ -31,20 +31,40 @@ const CreateInvoice = () => {
         const { name, value } = e.target;
         const newInvoiceLines = [...invoiceData.invoiceLines];
         newInvoiceLines[index][name] = value;
+
+        if (name === 'quantity' || name === 'amount') {
+            const quantity = parseFloat(newInvoiceLines[index].quantity) || 0;
+            const amount = parseFloat(newInvoiceLines[index].amount) || 0;
+            newInvoiceLines[index].amount = (quantity * amount).toFixed(2);
+        }
+
         setInvoiceData({
             ...invoiceData,
             invoiceLines: newInvoiceLines
         });
+        calculateTotalAmount(newInvoiceLines);
     };
 
     const addInvoiceLine = () => {
+        const newInvoiceLines = [
+            ...invoiceData.invoiceLines,
+            { quantity: '', itemName: '', unitCode: '', currencyID: '', amount: '' }
+        ];
         setInvoiceData({
             ...invoiceData,
-            invoiceLines: [
-                ...invoiceData.invoiceLines,
-                { quantity: '', itemName: '', unitCode: '', currencyID: '', amount: '' }
-            ]
+            invoiceLines: newInvoiceLines
         });
+        calculateTotalAmount(newInvoiceLines);
+    };
+
+    const calculateTotalAmount = (invoiceLines) => {
+        const totalAmount = invoiceLines.reduce((total, line) => {
+            return total + parseFloat(line.amount || 0);
+        }, 0);
+        setInvoiceData((prevData) => ({
+            ...prevData,
+            amount: totalAmount.toFixed(2)
+        }));
     };
 
     const generatePDF = async () => {
@@ -175,7 +195,7 @@ const CreateInvoice = () => {
             <div>
                 <label>
                     Amount:
-                    <input type="text" name="amount" placeholder="Amount" onChange={handleInputChange} />
+                    <input type="text" name="amount" placeholder="Amount" value={invoiceData.amount} readOnly />
                 </label>
             </div>
             <div>
