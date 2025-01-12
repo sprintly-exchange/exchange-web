@@ -87,10 +87,6 @@ const CreateInvoice = () => {
     };
 
     const handleSubmit = async (format) => {
-        const url = '/api/invoices';
-        const headers = {
-            'Content-Type': format === 'xml' ? 'application/xml' : 'application/json'
-        };
 
         let body;
         if (format === 'xml') {
@@ -159,9 +155,21 @@ const CreateInvoice = () => {
         }
 
         try {
-            const response = await axiosInstance.post(url, body, { headers });
+            const url = '/api/invoices';
+            const headers = {
+                'Content-Type': format === 'xml' ? 'application/xml' : 'application/json'
+            };
 
-            if (!response.ok) {
+            const formData = new FormData();
+            const blob = new Blob([body], { type: format === 'xml' ? 'application/xml' : 'application/json' });
+            formData.append("file", blob, `invoice.${format}`);
+            const response = await axiosInstance.post("/api/invoice", formData, {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              });
+
+            if (response.status !== 200) {
                 throw new Error('Network response was not ok');
             }
 
@@ -237,7 +245,7 @@ const CreateInvoice = () => {
                 </tbody>
             </table>
             <button type="button" onClick={addInvoiceLine}>Add Invoice Line</button>
-            <button type="button" onClick={() => handleSubmit('json')}>Submit</button>
+            <button type="button" onClick={() => handleSubmit('xml')}>Submit</button>
         </form>
     );
 };
