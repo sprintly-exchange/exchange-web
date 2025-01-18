@@ -7,7 +7,6 @@ const InvoicePage = () => {
   return (
     <div>
         <InvoiceUploader></InvoiceUploader>
-        <CreateInvoice></CreateInvoice>
         <CreateInvoicePage></CreateInvoicePage>
     </div>
   )

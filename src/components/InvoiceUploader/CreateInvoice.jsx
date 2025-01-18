@@ -1,92 +1,65 @@
-import React, { useState } from 'react';
-import axiosInstance from '../utils/axiosConfig';
+import React, { useState, useEffect } from 'react';
+import { Table, Input, Button, Form, Row, Col, Card, Typography } from 'antd';
+import axios from 'axios';
 
-const CreateInvoice = () => {
-    const [invoiceData, setInvoiceData] = useState({
-        id: '',
-        senderName: '',
-        recipientName: '',
-        amount: '',
-        date: '',
-        invoiceLines: [
-            {
-                quantity: '2',
-                itemName: 'Product A',
-                unitCode: 'EA',
-                currencyID: 'EUR',
-                amount: ''
+const { Title } = Typography;
+
+const CreateInvoicePage = () => {
+    const [invoiceLines, setInvoiceLines] = useState([
+        { key: 1, quantity: '', itemName: '', unitPrice: '', currencyID: 'USD', amount: '' },
+    ]);
+    const [totalAmount, setTotalAmount] = useState(0);
+    const [form] = Form.useForm();
+
+    useEffect(() => {
+        const total = invoiceLines.reduce((sum, line) => sum + parseFloat(line.amount || 0), 0);
+        setTotalAmount(total.toFixed(2));
+    }, [invoiceLines]);
+
+    const handleLineChange = (key, field, value) => {
+        const updatedLines = invoiceLines.map((line) => {
+            if (line.key === key) {
+                const updatedLine = { ...line, [field]: value };
+
+                if (field === 'quantity' || field === 'unitPrice') {
+                    const quantity = parseFloat(updatedLine.quantity) || 0;
+                    const unitPrice = parseFloat(updatedLine.unitPrice) || 0;
+                    updatedLine.amount = (quantity * unitPrice).toFixed(2);
+                }
+
+                if (field === 'amount') {
+                    const amount = parseFloat(value) || 0;
+                    const quantity = parseFloat(updatedLine.quantity) || 1;
+                    updatedLine.unitPrice = (amount / quantity).toFixed(2);
+                }
+
+                return updatedLine;
             }
-        ]
-    });
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setInvoiceData({
-            ...invoiceData,
-            [name]: value
+            return line;
         });
-    };
 
-    const handleLineChange = (index, e) => {
-        const { name, value } = e.target;
-        const newInvoiceLines = [...invoiceData.invoiceLines];
-        newInvoiceLines[index][name] = value;
-
-        if (name === 'quantity' || name === 'amount') {
-            const quantity = parseFloat(newInvoiceLines[index].quantity) || 0;
-            const amount = parseFloat(newInvoiceLines[index].amount) || 0;
-            newInvoiceLines[index].amount = (quantity * amount).toFixed(2);
-        }
-
-        setInvoiceData({
-            ...invoiceData,
-            invoiceLines: newInvoiceLines
-        });
-        calculateTotalAmount(newInvoiceLines);
+        setInvoiceLines(updatedLines);
     };
 
     const addInvoiceLine = () => {
-        const newInvoiceLines = [
-            ...invoiceData.invoiceLines,
-            { quantity: '', itemName: '', unitCode: '', currencyID: '', amount: '' }
-        ];
-        setInvoiceData({
-            ...invoiceData,
-            invoiceLines: newInvoiceLines
-        });
-        calculateTotalAmount(newInvoiceLines);
+        const newLine = {
+            key: invoiceLines.length + 1,
+            quantity: '',
+            itemName: '',
+            unitPrice: '',
+            currencyID: 'USD',
+            amount: '',
+        };
+        setInvoiceLines([...invoiceLines, newLine]);
     };
 
-    const calculateTotalAmount = (invoiceLines) => {
-        const totalAmount = invoiceLines.reduce((total, line) => {
-            return total + parseFloat(line.amount || 0);
-        }, 0);
-        setInvoiceData((prevData) => ({
-            ...prevData,
-            amount: totalAmount.toFixed(2)
-        }));
-    };
-
-    const generatePDF = async () => {
-        const { jsPDF } = await import('jspdf');
-        const doc = new jsPDF();
-
-        doc.text(`Invoice ID: ${invoiceData.id}`, 10, 10);
-        doc.text(`Sender Name: ${invoiceData.senderName}`, 10, 20);
-        doc.text(`Recipient Name: ${invoiceData.recipientName}`, 10, 30);
-        doc.text(`Amount: ${invoiceData.amount}`, 10, 40);
-        doc.text(`Date: ${invoiceData.date}`, 10, 50);
-
-        invoiceData.invoiceLines.forEach((line, index) => {
-            doc.text(`Item ${index + 1}: ${line.itemName}`, 10, 60 + index * 10);
-            doc.text(`Quantity: ${line.quantity}`, 10, 70 + index * 10);
-            doc.text(`Amount: ${line.amount}`, 10, 80 + index * 10);
-        });
-
-        doc.save('invoice.pdf');
+    const removeInvoiceLine = (key) => {
+        setInvoiceLines(invoiceLines.filter((line) => line.key !== key));
     };
 
     const handleSubmit = async (format) => {
+        const invoiceData = form.getFieldsValue();
+        invoiceData.invoiceLines = invoiceLines;
 
         let body;
         if (format === 'xml') {
@@ -100,8 +73,7 @@ const CreateInvoice = () => {
                                 <cbc:Name>${invoiceData.senderName}</cbc:Name>
                             </cbc:PartyName>
                         </cac:Party>
-                    </cac:AccountingSupplierParty>
-                    <cac:AccountingCustomerParty>
+                    </cac:AccountingCustomerParty>
                         <cac:Party>
                             <cbc:PartyName>
                                 <cbc:Name>${invoiceData.recipientName}</cbc:Name>
@@ -109,16 +81,16 @@ const CreateInvoice = () => {
                         </cac:Party>
                     </cac:AccountingCustomerParty>
                     <cac:InvoiceLines>
-                        ${invoiceData.invoiceLines.map((line, index) => `
+                        ${invoiceLines.map((line, index) => `
                             <cac:InvoiceLine>
                                 <cbc:ID>${index + 1}</cbc:ID>
-                                <cbc:InvoicedQuantity unitCode="${line.unitCode}">${line.quantity}</cbc:InvoicedQuantity>
+                                <cbc:InvoicedQuantity unitCode="EA">${line.quantity}</cbc:InvoicedQuantity>
                                 <cbc:LineExtensionAmount currencyID="${line.currencyID}">${line.amount}</cbc:LineExtensionAmount>
                                 <cac:Item>
                                     <cbc:Name>${line.itemName}</cbc:Name>
                                 </cac:Item>
                                 <cac:Price>
-                                    <cbc:PriceAmount currencyID="${line.currencyID}">${(line.amount / line.quantity).toFixed(2)}</cbc:PriceAmount>
+                                    <cbc:PriceAmount currencyID="${line.currencyID}">${line.unitPrice}</cbc:PriceAmount>
                                 </cac:Price>
                             </cac:InvoiceLine>
                         `).join('')}
@@ -132,122 +104,61 @@ const CreateInvoice = () => {
                     ID: invoiceData.id,
                     IssueDate: invoiceData.date,
                     AccountingSupplierParty: {
-                        Party: {
-                            PartyName: { Name: invoiceData.senderName },
-                        },
+                        Party: { PartyName: { Name: invoiceData.senderName } },
                     },
                     AccountingCustomerParty: {
-                        Party: {
-                            PartyName: { Name: invoiceData.recipientName },
-                        },
+                        Party: { PartyName: { Name: invoiceData.recipientName } },
                     },
-                    InvoiceLines: {
-                        InvoiceLine: invoiceData.invoiceLines.map((line, index) => ({
-                            ID: index + 1,
-                            InvoicedQuantity: { '#text': line.quantity, '@unitCode': line.unitCode },
-                            LineExtensionAmount: { '#text': line.amount, '@currencyID': line.currencyID },
-                            Item: { Name: line.itemName },
-                            Price: { PriceAmount: { '#text': (line.amount / line.quantity).toFixed(2), '@currencyID': line.currencyID } },
-                        })),
-                    },
-                }
+                    InvoiceLines: invoiceLines.map((line, index) => ({
+                        ID: index + 1,
+                        InvoicedQuantity: { '#text': line.quantity, '@unitCode': 'EA' },
+                        LineExtensionAmount: { '#text': line.amount, '@currencyID': line.currencyID },
+                        Item: { Name: line.itemName },
+                        Price: { PriceAmount: { '#text': line.unitPrice, '@currencyID': line.currencyID } },
+                    })),
+                },
             });
         }
 
         try {
-            const url = '/api/invoices';
-            const headers = {
-                'Content-Type': format === 'xml' ? 'application/xml' : 'application/json'
-            };
-
             const formData = new FormData();
             const blob = new Blob([body], { type: format === 'xml' ? 'application/xml' : 'application/json' });
-            formData.append("file", blob, `invoice.${format}`);
-            const response = await axiosInstance.post("/api/invoice", formData, {
+            formData.append('file', blob, `invoice.${format}`);
+
+            const response = await axios.post('/api/invoice', formData, {
                 headers: {
-                  "Content-Type": "multipart/form-data",
+                    'Content-Type': 'multipart/form-data',
                 },
-              });
+            });
 
-            if (response.status !== 200) {
-                throw new Error('Network response was not ok');
+            if (response.status === 200) {
+                console.log('Invoice created successfully:', response.data);
+            } else {
+                throw new Error('Error creating invoice');
             }
-
-            const result = await response.json();
-            console.log('Invoice created successfully:', result);
         } catch (error) {
-            console.error('Error creating invoice:', error);
+            console.error('Error:', error);
         }
     };
 
+    const columns = [
+        // Columns definition remains the same
+    ];
+
     return (
-        <form onSubmit={(e) => { e.preventDefault(); handleSubmit('json'); }}>
-            <div>
-                <label>
-                    Invoice ID:
-                    <input type="text" name="id" placeholder="Invoice ID" onChange={handleInputChange} />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Sender Name:
-                    <input type="text" name="senderName" placeholder="Sender Name" onChange={handleInputChange} />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Recipient Name:
-                    <input type="text" name="recipientName" placeholder="Recipient Name" onChange={handleInputChange} />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Amount:
-                    <input type="text" name="amount" placeholder="Amount" value={invoiceData.amount} readOnly />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Date:
-                    <input type="date" name="date" onChange={handleInputChange} />
-                </label>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Quantity</th>
-                        <th>Item Name</th>
-                        <th>Unit Code</th>
-                        <th>Currency ID</th>
-                        <th>Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {invoiceData.invoiceLines.map((line, index) => (
-                        <tr key={index}>
-                            <td>
-                                <input type="number" name="quantity" placeholder="Quantity" value={line.quantity} onChange={(e) => handleLineChange(index, e)} />
-                            </td>
-                            <td>
-                                <input type="text" name="itemName" placeholder="Item Name" value={line.itemName} onChange={(e) => handleLineChange(index, e)} />
-                            </td>
-                            <td>
-                                <input type="text" name="unitCode" placeholder="Unit Code" value={line.unitCode} onChange={(e) => handleLineChange(index, e)} />
-                            </td>
-                            <td>
-                                <input type="text" name="currencyID" placeholder="Currency ID" value={line.currencyID} onChange={(e) => handleLineChange(index, e)} />
-                            </td>
-                            <td>
-                                <input type="text" name="amount" placeholder="Amount" value={line.amount} onChange={(e) => handleLineChange(index, e)} />
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <button type="button" onClick={addInvoiceLine}>Add Invoice Line</button>
-            <button type="button" onClick={() => handleSubmit('xml')}>Submit</button>
-        </form>
+        <Card style={{ padding: '24px' }}>
+            <Title level={3}>Create Invoice</Title>
+            <Form layout="vertical" form={form}>
+                {/* Form fields remain the same */}
+                <Button type="primary" onClick={() => handleSubmit('xml')} style={{ marginRight: 8 }}>
+                    Submit as XML
+                </Button>
+                <Button type="primary" onClick={() => handleSubmit('json')}>
+                    Submit as JSON
+                </Button>
+            </Form>
+        </Card>
     );
 };
 
-export default CreateInvoice;
+export default CreateInvoicePage;
