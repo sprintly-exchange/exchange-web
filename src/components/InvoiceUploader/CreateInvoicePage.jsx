@@ -56,28 +56,23 @@ const CreateInvoicePage = () => {
             const invoiceData = form.getFieldsValue();
             invoiceData.invoiceLines = invoiceLines;
     
-            const body = JSON.stringify({
-                Invoice: {
-                    '@xmlns': 'urn:oasis:names:specification:ubl:schema:xsd:Invoice-2',
-                    ID: invoiceData.id,
-                    IssueDate: invoiceData.date,
-                    AccountingSupplierParty: {
-                        Party: { PartyName: { Name: invoiceData.senderName } },
-                    },
-                    AccountingCustomerParty: {
-                        Party: { PartyName: { Name: invoiceData.recipientName } },
-                    },
-                    InvoiceLines: invoiceLines.map((line, index) => ({
-                        ID: index + 1,
-                        InvoicedQuantity: { '#text': line.quantity, '@unitCode': 'EA' },
-                        LineExtensionAmount: { '#text': line.amount, '@currencyID': line.currencyID },
-                        Item: { Name: line.itemName },
-                        Price: { PriceAmount: { '#text': line.unitPrice, '@currencyID': line.currencyID } },
-                    })),
-                },
-            });
+            const body = {
+                id: invoiceData.id,
+                date: invoiceData.date,
+                senderName: invoiceData.senderName,
+                recipientName: invoiceData.recipientName,
+                invoiceLines: invoiceLines.map((line, index) => ({
+                    id: index + 1,
+                    quantity: line.quantity,
+                    unitCode: 'EA',
+                    amount: line.amount,
+                    currencyID: line.currencyID,
+                    itemName: line.itemName,
+                    unitPrice: line.unitPrice,
+                })),
+            };
     
-            const response = await axios.post('/api/invoice', body, {
+            const response = await axios.post('/api/invoice/json', body, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
