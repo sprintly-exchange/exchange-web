@@ -52,7 +52,6 @@ const DynamicEditableForm = ({ inputData, apiUrl, httpMethod, objectName, action
   }, [inputData, form]);
 
   const onFinish = (values) => {
-    if(hiddenFields.id !== undefined || values.connectionName) {
        // Merge the hidden fields with form values
       const nestedData = unflattenObject({
         ...values,
@@ -61,7 +60,7 @@ const DynamicEditableForm = ({ inputData, apiUrl, httpMethod, objectName, action
       setData(flattenObject(nestedData));
       new ApiClient().updateData(apiUrl, nestedData, httpMethod);
       setEditWindowEnabled(false);
-    }
+    
    
   };
 
@@ -81,6 +80,7 @@ const DynamicEditableForm = ({ inputData, apiUrl, httpMethod, objectName, action
                   key.includes('UiDisplayFalse') 
                     || key === 'processingId'
                     || key === 'organizationId'
+                    || key === 'organizationIds'
                     || key === 'userId'
                     || key === 'connectionId'
                     || key === 'pickupId'
