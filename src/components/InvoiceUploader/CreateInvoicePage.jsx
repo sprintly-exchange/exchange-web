@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Input, Button, Form, Row, Col, Card, Typography } from 'antd';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosConfig';
+
 
 const { Title } = Typography;
 
@@ -72,7 +73,7 @@ const CreateInvoicePage = () => {
                 })),
             };
     
-            const response = await axios.post('/api/invoice/json', body, {
+            const response = await axiosInstance.post('/api/invoice/json', body, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
